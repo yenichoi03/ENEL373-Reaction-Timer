@@ -1,0 +1,13 @@
+EMILY (4/04/24):
+- Have added a skeleton ALU module which will need to be able to add, divide, and compare
+- Currently the inputs and outputs are std logic vecs cause then we can use in built arithmetic but this also means converting into vecs from BCD somewhere
+- unsure if that conversion should happen in the FSM or probably preferably in its own block
+- the registers are just places values get put
+- Need to have a think about how we syncronise stuff? thats what the op_en(able) and op_done are for but not sure if they're optimal
+- FSM has new states for showing different settings + one for doing calcs. Unsure if comparision should be done internally or in the ALU
+- FSM tb is not currently functional just needs updating the port map tho
+
+MARCUS():
+
+
+YENI():

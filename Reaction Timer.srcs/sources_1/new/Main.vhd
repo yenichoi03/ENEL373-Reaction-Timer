@@ -14,10 +14,7 @@ entity main is
     Port ( CLK100MHZ : in STD_LOGIC;
            LED : out STD_LOGIC_VECTOR (7 downto 0);
            AN: out STD_LOGIC_VECTOR (7 downto 0);
-           BTNC : in STD_LOGIC;
-           BTNR : in STD_LOGIC;
-           BTND : in STD_LOGIC;
-           BTNL : in STD_LOGIC;
+           BTNC, BTNU, BTND, BTNL, BTNR : in STD_LOGIC;
            CA: out STD_LOGIC;
            CB: out STD_LOGIC;
            CC: out STD_LOGIC;
@@ -90,26 +87,29 @@ component bcd_to_7seg is
     end component;
    
 component FSM is
-    Port ( CLK, RST: in STD_LOGIC;
-           BTN : in STD_LOGIC := '0';                                  -- This is also used as a reset as well
+Port ( CLK, RST, op_done: in STD_LOGIC;
+           BTNC, BTNU, BTND, BTNL, BTNR  : in STD_LOGIC := '0';
+           op : out STD_LOGIC_VECTOR(2 downto 0) := "000";
+           A, B : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+           R : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
            counter_en, counter_rst : out STD_LOGIC := '0'; 
-           message : out STD_LOGIC_VECTOR (31 downto 0));       -- each nibble of message represent one character or digit on a 7 segment display.
+           message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
     end component;
     
 component register_16bit is
-    Port ( CLK : STD_LOGIC; 
-           D_IN : STD_LOGIC_VECTOR (15 downto 0);
-           D_OUT : STD_LOGIC_VECTOR (15 downto 0));
+    Port ( CLK : in STD_LOGIC; 
+           D_IN : in STD_LOGIC_VECTOR (15 downto 0);
+           D_OUT : out STD_LOGIC_VECTOR (15 downto 0));
     end component;
     
 component ALU is
-    Port (op : STD_LOGIC_VECTOR(2 downto 0);
-          op_en : STD_LOGIC;
-          op_done : STD_LOGIC;
-          A: STD_LOGIC_VECTOR(15 downto 0);
-          B: STD_LOGIC_VECTOR(15 downto 0);
-          R: STD_LOGIC_VECTOR(15 downto 0));
+    Port (op : in STD_LOGIC_VECTOR(2 downto 0);
+          op_en : in STD_LOGIC;
+          op_done : out STD_LOGIC;
+          A: in STD_LOGIC_VECTOR(15 downto 0);
+          B: in STD_LOGIC_VECTOR(15 downto 0);
+          R: out STD_LOGIC_VECTOR(15 downto 0));
     end component;
    
 component decade_counter is
@@ -145,7 +145,7 @@ cathode_decoder : bcd_to_7seg port map (BCD => current_bcd, DP => dp_out, SEG =>
 --FUNCTIONALITY MODULES--
 
 fsm_clk_divider : clock_divider port map (CLK => CLK100MHZ, UPPERBOUND => fsm_bound, SLOWCLK => fsm_clk);
-fsm_block : FSM port map (BTN => BTNC, CLK => fsm_clk, RST => global_rst, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
+fsm_block : FSM port map (BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, op_done => op_done, A => A_out, B => B_out, R => R_in, RST => global_rst, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
 
 register_A : register_16bit port map(CLK => op_en, D_in => A_in, D_out => A_out);
 register_B : register_16bit port map(CLK => op_en, D_in => B_in, D_out => B_out);

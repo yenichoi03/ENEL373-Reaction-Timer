@@ -22,26 +22,28 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity FSM is
-    Port ( CLK, RST: in STD_LOGIC;
-           BTN : in STD_LOGIC := '0';                                  -- This is also used as a reset as well
+    Port ( CLK, RST, op_done: in STD_LOGIC;
+           BTNC, BTNU, BTND, BTNL, BTNR  : in STD_LOGIC := '0';
+           op : out STD_LOGIC_VECTOR(2 downto 0) := "000";
+           A, B : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+           R : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
---           NUM : out STD_LOGIC_VECTOR (3 downto 0):= "0000";        --What is this?
            counter_en, counter_rst : out STD_LOGIC := '0'; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end FSM;
 
 architecture Behavioral of FSM is
 
-    type state is (dot_3, dot_2, dot_1, counting, printing);
+    type state is (dot_3, dot_2, dot_1, counting, calculating, print_current_time, print_best_time, print_worst_time, print_average_time);
     
     signal current_state, next_state : state := dot_3;
---    signal RST : STD_LOGIC := '0';
---    signal COUNT : STD_LOGIC := '0';
---    signal Counter_en : STD_LOGIC := '0';
---    signal Counter_rst : STD_LOGIC := '1';                  
-
     constant T1: natural := 1000;
-    signal t: natural range 0 to T1 -1;                 
+    signal t: natural range 0 to T1 -1;
+    
+    signal best_time : STD_LOGIC_VECTOR(15 downto 0) := x"0000";
+    signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
+    signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";
+    signal run_count : STD_LOGIC_VECTOR(3 downto 0) := x"0";                 
 
 begin
 
@@ -56,7 +58,7 @@ begin
         end if;
 end process;
 
-NEXT_STATE_DECODE: process (current_state, t, BTN)
+NEXT_STATE_DECODE: process (current_state, t, BTNC, BTNU, BTND, BTNL, BTNR)
 begin 
     case (current_state) is
         when dot_3 =>
@@ -79,16 +81,46 @@ begin
                 next_state <= dot_1;
             end if;
         when counting =>
-            if BTN = '1' then
-                next_state <= printing;
+            if BTNC = '1' then
+                next_state <= calculating;
             else
                 next_state <= counting;
             end if;
-        when printing =>
-            if BTN = '1' and t = 999 then
+        when calculating => 
+            if op_done = '1' then
+                next_state <= print_current_time;
+            else
+                next_state <= calculating;
+            end if;
+        when print_current_time =>
+            if BTNC = '1' and t = 999 then
+                next_state <= dot_3;
+            elsif BTNU = '1' then
+                next_state <= print_worst_time;
+            elsif BTND = '1' then
+                next_state <= print_best_time;
+            elsif BTNR = '1' then
+                next_state <= print_average_time;
+            else
+                next_state <= print_current_time;
+            end if;
+        when print_worst_time =>
+            if BTNC = '1' and t = 999 then
                 next_state <= dot_3;
             else
-                next_state <= printing;
+                next_state <= print_worst_time;
+            end if;
+        when print_best_time =>
+            if BTNC = '1' and t = 999 then
+                next_state <= dot_3;
+            else
+                next_state <= print_best_time;
+            end if;
+        when print_average_time =>
+            if BTNC = '1' and t = 999 then
+                next_state <= dot_3;
+            else
+                next_state <= print_average_time;
             end if;
         when others =>
             next_state <= current_state;
@@ -101,34 +133,51 @@ begin
         when dot_3 =>
             counter_en <= '0';
             counter_rst <= '1';
---            NUM <= "0001";
             message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
         when dot_2 =>
             counter_en <= '0';
             counter_rst <= '0';
---            NUM <= "0010";
             message <= X"aaaaaaFF"; -- to modify to show two dots
         when dot_1 =>
             counter_en <= '0';
             counter_rst <= '0';
---            NUM <= "0011";
             message <= X"aaaaaaaF"; -- to modify to show one dots
         when counting =>
             counter_en <= '1';
             counter_rst <= '0';
---            NUM <= "0100"; 
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Decade counter counts 
-        when printing =>
+            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Decade counter counts
+        when calculating =>
+            counter_en <= '1';
+            counter_rst <= '0';
+            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; --Display final time
+            --Check if new time is the best or worst time
+            --Add current time to sum
+        when print_current_time =>
             counter_en <= '0';
             counter_rst <= '0';
---            NUM <= "0101";
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
+        when print_best_time =>
+            counter_en <= '0';
+            counter_rst <= '0';
+            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            --DISPLAY SHORTEST TIME
+        when print_worst_time =>
+            counter_en <= '0';
+            counter_rst <= '0';
+            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            --DISPLAY LONGEST TIME
+        when print_average_time =>
+            counter_en <= '0';
+            counter_rst <= '0';
+            --TELL ALU TO DIVIDE SUM BY RUN_NUMBER
+            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            --DISPLAY RESULT REG
         when others =>
             counter_en <= '0';
             counter_rst <= '0';
---            NUM <= "1111";
             message <= X"aaaaaaaa";
     end case;
 end process;
