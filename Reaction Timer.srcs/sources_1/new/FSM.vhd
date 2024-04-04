@@ -20,6 +20,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity FSM is
     Port ( CLK, RST, op_done: in STD_LOGIC;
@@ -152,8 +153,10 @@ begin
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; --Display final time
-            --Check if new time is the best or worst time
-            --Add current time to sum
+            run_count <= std_logic_vector(unsigned(run_count) + 1);
+            --Check if new time is the best or worst time, if yes update signal (should be variable?)
+            --Put current time in A and sum in B
+            --Tell ALU to add
         when print_current_time =>
             counter_en <= '0';
             counter_rst <= '0';
@@ -172,7 +175,9 @@ begin
         when print_average_time =>
             counter_en <= '0';
             counter_rst <= '0';
-            --TELL ALU TO DIVIDE SUM BY RUN_NUMBER
+            -- Put sum in A
+            -- Put run_count in B
+            -- Tell ALU to divide
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             --DISPLAY RESULT REG
         when others =>
