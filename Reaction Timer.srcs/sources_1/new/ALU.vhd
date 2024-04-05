@@ -51,10 +51,16 @@ if(rising_edge(op_en)) then
         R <= std_logic_vector(unsigned(A) + unsigned(B));
         op_done <= '1';
     elsif(op = "010") then
+        --Subtract B from A
+        --Put result in R
+    elsif(op = "011") then
         --Divide reg A by reg B and put result in reg R
-    elsif(op = "100") then
+    elsif(op = "110") then
         --Compare A and B
-        --Put (others => '1') in R if A is greater than B, otherwise put (others => '0')
+        --Put bigger value in R
+    elsif(op = "111") then
+        --Compare A and B
+        --Put smaller value in R
     else
         op_done <= '0';
     end if;
