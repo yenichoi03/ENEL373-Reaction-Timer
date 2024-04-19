@@ -23,22 +23,14 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity ALU is
-    Port (op : in STD_LOGIC_VECTOR(2 downto 0);
-          op_en : in STD_LOGIC;
-          op_done : out STD_LOGIC;
-          A: in STD_LOGIC_VECTOR(15 downto 0);
-          B: in STD_LOGIC_VECTOR(15 downto 0);
-          R: out STD_LOGIC_VECTOR(15 downto 0));
+    Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
+          op_en : in STD_LOGIC;                     -- Enable/disable ALU functions 
+          op_done : out STD_LOGIC;                  -- Indicates if ALU operation is finished (Where would this output go?)
+          A: in STD_LOGIC_VECTOR(15 downto 0);      -- The BCD input from register A
+          B: in STD_LOGIC_VECTOR(15 downto 0);      -- The BCD input from register B
+          R: out STD_LOGIC_VECTOR(15 downto 0));    -- The BCD output 
 end ALU;
 
 architecture Behavioral of ALU is
@@ -48,25 +40,36 @@ process(op_en)
 begin
 if(rising_edge(op_en)) then
     if(op = "001") then
-        R <= std_logic_vector(unsigned(A) + unsigned(B));
+        R <= to_integer(A) + to_integer(B);
         op_done <= '1';
     elsif(op = "010") then
+        R <= std_logic_vector(unsigned(B) - unsigned(A));
+        op_done <= '1';
         --Subtract B from A
         --Put result in R
     elsif(op = "011") then
         --Divide reg A by reg B and put result in reg R
-    elsif(op = "110") then
+    elsif(op = "110") then      -- make (op = "100")
         --Compare A and B
         --Put bigger value in R
-    elsif(op = "111") then
+        if (A > B) then
+            R <= A;
+        elsif (B > A) then
+            R <= B;
+        
+    elsif(op = "111") then      -- make (op = "101")
         --Compare A and B
         --Put smaller value in R
+        if (A < B) then
+            R <= A;
+        elsif (B < A) then
+            R <= B;
     else
         op_done <= '0';
     end if;
 end if;
 
-end process;
+end process (op_en);
 
 
 end Behavioral;
