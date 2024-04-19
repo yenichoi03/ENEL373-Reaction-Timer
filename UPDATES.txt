@@ -42,4 +42,5 @@ MARCUS():
 
 
 YENI():
-
+ALU division, subtraction and comparison would be good to do in integers. The difficult bit is converting the int into BCD.
+I will work on the ALU functions. 
