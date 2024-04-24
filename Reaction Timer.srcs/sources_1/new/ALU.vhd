@@ -28,9 +28,10 @@ entity ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
           op_en : in STD_LOGIC;                     -- Enable/disable ALU functions 
           op_done : out STD_LOGIC;                  -- Indicates if ALU operation is finished (Where would this output go?)
-          A: in STD_LOGIC_VECTOR(15 downto 0);      -- The BCD input from register A
-          B: in STD_LOGIC_VECTOR(15 downto 0);      -- The BCD input from register B
-          R: out STD_LOGIC_VECTOR(15 downto 0));    -- The BCD output 
+          A: in integer;      -- time
+          B: in integer;    --time
+          C: in integer;     -- time
+          R: out integer);    -- result
 end ALU;
 
 architecture Behavioral of ALU is

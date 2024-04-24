@@ -2,16 +2,16 @@
 # Vivado v2022.2 (64-bit)
 # SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
 # IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
-# Start of session at: Wed Apr 24 16:08:44 2024
-# Process ID: 3948
-# Current directory: H:/2024/ENEL373/WedGroup17
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent3680 H:\2024\ENEL373\WedGroup17\Reaction Timer.xpr
-# Log file: H:/2024/ENEL373/WedGroup17/vivado.log
-# Journal file: H:/2024/ENEL373/WedGroup17\vivado.jou
-# Running On: ECE-ELECTRO-24, OS: Windows, CPU Frequency: 3192 MHz, CPU Physical cores: 6, Host memory: 16943 MB
+# Start of session at: Fri Apr 19 15:52:46 2024
+# Process ID: 12644
+# Current directory: P:/ENEL373/WedGroup17
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent12052 P:\ENEL373\WedGroup17\Reaction Timer.xpr
+# Log file: P:/ENEL373/WedGroup17/vivado.log
+# Journal file: P:/ENEL373/WedGroup17\vivado.jou
+# Running On: ECE-ESL32, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 8, Host memory: 34125 MB
 #-----------------------------------------------------------
 start_gui
-open_project {H:/2024/ENEL373/WedGroup17/Reaction Timer.xpr}
+open_project {P:/ENEL373/WedGroup17/Reaction Timer.xpr}
 WARNING: [Board 49-26] cannot add Board Part digilentinc.com:arty-z7-10:part0:1.1 available at C:/Xilinx/Vivado/2022.2/data/boards/board_files/arty-z7-10/A.0/board.xml as part xc7z010clg400-1 specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part digilentinc.com:arty-z7-20:part0:1.1 available at C:/Xilinx/Vivado/2022.2/data/boards/board_files/arty-z7-20/A.0/board.xml as part xc7z020clg400-1 specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part digilentinc.com:cora-z7-07s:part0:1.1 available at C:/Xilinx/Vivado/2022.2/data/boards/board_files/cora-z7-07s/B.0/board.xml as part xc7z007sclg400-1 specified in board_part file is either invalid or not available
@@ -80,12 +80,14 @@ WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216:part0:2.0 availab
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216ld:part0:2.0 available at C:/Xilinx/Vivado/2022.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu216ld/production/2.0/board.xml as part xczu59dr-ffvf1760-2-i specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670:part0:2.0 available at C:/Xilinx/Vivado/2022.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670/2.0/board.xml as part xczu67dr-fsve1156-2-i specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 available at C:/Xilinx/Vivado/2022.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670ld/1.0/board.xml as part xczu57dr-fsve1156-2-i specified in board_part file is either invalid or not available
-INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'H:/2024/ENEL373/WedGroup17/Reaction Timer.gen/sources_1'.
+INFO: [Project 1-313] Project file moved from 'H:/2024/ENEL373/WedGroup17' since last save.
+INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'P:/ENEL373/WedGroup17/Reaction Timer.gen/sources_1'.
+WARNING: [filemgmt 56-3] IPUserFilesDir: Could not find the directory 'P:/ENEL373/WedGroup17/Reaction Timer.ip_user_files'.
 Scanning sources...
 Finished scanning sources
+WARNING: [Project 1-509] GeneratedRun file for 'synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'impl_1' not found
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2022.2/data/ip'.
-open_project: Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1199.680 ; gain = 447.664
-exit
-INFO: [Common 17-206] Exiting Vivado at Wed Apr 24 17:03:42 2024...
+open_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1244.160 ; gain = 456.559

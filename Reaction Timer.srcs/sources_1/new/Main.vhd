@@ -104,12 +104,13 @@ component register_16bit is
     end component;
     
 component ALU is
-    Port (op : in STD_LOGIC_VECTOR(2 downto 0);
-          op_en : in STD_LOGIC;
-          op_done : out STD_LOGIC;
-          A: in STD_LOGIC_VECTOR(15 downto 0);
-          B: in STD_LOGIC_VECTOR(15 downto 0);
-          R: out STD_LOGIC_VECTOR(15 downto 0));
+    Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
+          op_en : in STD_LOGIC;                     -- Enable/disable ALU functions 
+          op_done : out STD_LOGIC;                  -- Indicates if ALU operation is finished (Where would this output go?)
+          A: in integer;      -- time
+          B: in integer;    --time
+          C: in integer;     -- time
+          R: out integer);
     end component;
    
 component decade_counter is
@@ -149,7 +150,7 @@ fsm_block : FSM port map (BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, 
 
 register_A : register_16bit port map(CLK => op_en, D_in => A_in, D_out => A_out);
 register_B : register_16bit port map(CLK => op_en, D_in => B_in, D_out => B_out);
-ALU_block : ALU port map(op =>op, op_en => op_en, op_done => op_done, A => A_out, B =>B_out, R => R_in);
+--ALU_block : ALU port map(op =>op, op_en => op_en, op_done => op_done, A => A_out, B =>B_out, R => R_in);
 register_R : register_16bit port map(CLK => op_done, D_in => R_in, D_out => R_out);
 
 ones : decade_counter port map (EN => enable, RESET => reset, INCREMENT => fsm_clk, COUNT => COUNT_1, TICK => ones_to_tens);
