@@ -26,8 +26,6 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
-          op_en : in STD_LOGIC;                     -- Enable/disable ALU functions 
-          op_done : out STD_LOGIC;                  -- Indicates if ALU operation is finished (Where would this output go?)
           A: in integer;      -- time
           B: in integer;    --time
           C: in integer;     -- time
@@ -37,40 +35,49 @@ end ALU;
 architecture Behavioral of ALU is
 
 begin
-process(op_en)
+process(op)
+variable result : integer := 0;
+variable num_runs : integer := 0;
 begin
-if(rising_edge(op_en)) then
-    if(op = "001") then
-        R <= to_integer(A) + to_integer(B);
-        op_done <= '1';
-    elsif(op = "010") then
-        R <= std_logic_vector(unsigned(B) - unsigned(A));
-        op_done <= '1';
-        --Subtract B from A
-        --Put result in R
-    elsif(op = "011") then
-        --Divide reg A by reg B and put result in reg R
-    elsif(op = "110") then      -- make (op = "100")
-        --Compare A and B
-        --Put bigger value in R
-        if (A > B) then
-            R <= A;
-        elsif (B > A) then
-            R <= B;
-        
-    elsif(op = "111") then      -- make (op = "101")
-        --Compare A and B
-        --Put smaller value in R
-        if (A < B) then
-            R <= A;
-        elsif (B < A) then
-            R <= B;
-    else
-        op_done <= '0';
-    end if;
-end if;
 
-end process (op_en);
+if(op = "001") then --worst time
+    result := 0;
+    if(A > result) then 
+        result := A;
+    end if;
+    if (B > result) then 
+        result := B;
+    end if;
+    if (C > result) then
+        result := C;
+    end if;
+elsif(op = "100") then --best time
+    result := 99999;
+     if(A < result) then 
+        result := A;
+    end if;
+    if (B < result) then 
+        result := B;
+    end if;
+    if (C < result) then
+        result := C;
+    end if;
+elsif(op = "010") then -- average
+    if(not(A = 0)) then 
+        num_runs := num_runs + 1;
+    end if;
+    if(not(B = 0)) then 
+        num_runs := num_runs + 1;
+    end if;
+    if(not(B = 0)) then 
+        num_runs := num_runs + 1;
+    end if;
+    result := (A+B+C)/num_runs;
+end if;
+R <= result;
+
+end process;
+
 
 
 end Behavioral;
