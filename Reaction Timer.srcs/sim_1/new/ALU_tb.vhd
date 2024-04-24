@@ -43,7 +43,7 @@ signal R : integer := 0;
 
 begin
 
-op <= "000" after 1ns;
+op <= "010" after 1ns;
 
 inst_ALU : entity work.ALU(Behavioral)
 port map (op => op, A=>A, B=>B, C=>C, R=>R);

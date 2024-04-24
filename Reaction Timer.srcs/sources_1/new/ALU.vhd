@@ -40,7 +40,7 @@ variable result : integer := 0;
 variable num_runs : integer := 0;
 begin
 
-if(op = "000") then --worst time
+if(op = "001") then --worst time
     result := 0;
     if(A > result) then 
         result := A;
@@ -51,7 +51,7 @@ if(op = "000") then --worst time
     if (C > result) then
         result := C;
     end if;
-elsif(op = "111") then --best time
+elsif(op = "100") then --best time
     result := 99999;
      if(A < result) then 
         result := A;

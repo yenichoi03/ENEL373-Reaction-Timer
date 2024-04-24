@@ -92,10 +92,13 @@ begin
                 next_state <= dot_3;
             elsif BTNU = '1' then
                 next_state <= print_worst_time;
+                op <= "001";
             elsif BTND = '1' then
                 next_state <= print_best_time;
+                op <= "100";
             elsif BTNR = '1' then
                 next_state <= print_average_time;
+                op <= "010";
             else
                 next_state <= print_current_time;
             end if;
@@ -145,17 +148,20 @@ begin
         when print_current_time =>
             counter_en <= '0';
             counter_rst <= '0';
+            CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
         when print_best_time =>
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            message(15 downto 0) <= RESULT;
             --DISPLAY SHORTEST TIME
         when print_worst_time =>
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            message(15 downto 0) <= RESULT;
             --DISPLAY LONGEST TIME
         when print_average_time =>
             counter_en <= '0';
@@ -164,7 +170,7 @@ begin
             -- Put run_count in B
             -- Tell ALU to divide
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            --DISPLAY RESULT REG
+            message(15 downto 0) <= RESULT;
         when others =>
             counter_en <= '0';
             counter_rst <= '0';
