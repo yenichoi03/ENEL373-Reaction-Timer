@@ -51,9 +51,9 @@ signal ones_to_tens, tens_to_hunds, hunds_to_mils, mils_to_beyond : STD_LOGIC :=
 signal enable, reset,global_rst : STD_LOGIC := '0';
 
 -- Arithmetic Signals --
-signal op_en, op_done : STD_LOGIC := '0';
 signal op      : STD_LOGIC_VECTOR (2 downto 0);
-signal A_in, A_out, B_in, B_out, R_in, R_out : STD_LOGIC_VECTOR (15 downto 0);    
+signal CURRENT_TIME, RESULT : STD_LOGIC_VECTOR (15 downto 0);
+signal A, B, C, R : integer;
 
 --COMPONENT DECLARATIONS--
 
@@ -87,15 +87,15 @@ component bcd_to_7seg is
     end component;
    
 component FSM is
-Port ( CLK, RST, op_done: in STD_LOGIC;
+Port ( CLK, RST: in STD_LOGIC;
            BTNC, BTNU, BTND, BTNL, BTNR  : in STD_LOGIC := '0';
            op : out STD_LOGIC_VECTOR(2 downto 0) := "000";
-           A, B : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-           R : in STD_LOGIC_VECTOR(15 downto 0);                               
+           CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+           RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
            counter_en, counter_rst : out STD_LOGIC := '0'; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
-    end component;
+end component;
     
 component register_16bit is
     Port ( CLK : in STD_LOGIC; 
@@ -105,8 +105,6 @@ component register_16bit is
     
 component ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
-          op_en : in STD_LOGIC;                     -- Enable/disable ALU functions 
-          op_done : out STD_LOGIC;                  -- Indicates if ALU operation is finished (Where would this output go?)
           A: in integer;      -- time
           B: in integer;    --time
           C: in integer;     -- time
@@ -146,12 +144,12 @@ cathode_decoder : bcd_to_7seg port map (BCD => current_bcd, DP => dp_out, SEG =>
 --FUNCTIONALITY MODULES--
 
 fsm_clk_divider : clock_divider port map (CLK => CLK100MHZ, UPPERBOUND => fsm_bound, SLOWCLK => fsm_clk);
-fsm_block : FSM port map (BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, op_done => op_done, A => A_out, B => B_out, R => R_in, RST => global_rst, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
+fsm_block : FSM port map (BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
 
-register_A : register_16bit port map(CLK => op_en, D_in => A_in, D_out => A_out);
-register_B : register_16bit port map(CLK => op_en, D_in => B_in, D_out => B_out);
---ALU_block : ALU port map(op =>op, op_en => op_en, op_done => op_done, A => A_out, B =>B_out, R => R_in);
-register_R : register_16bit port map(CLK => op_done, D_in => R_in, D_out => R_out);
+--register_A : register_16bit port map(CLK => op_en, D_in => A_in, D_out => A_out);
+--register_B : register_16bit port map(CLK => op_en, D_in => B_in, D_out => B_out);
+ALU_block : ALU port map(op =>op, A => A, B =>B, C =>C, R =>R);
+--register_R : register_16bit port map(CLK => op_done, D_in => R_in, D_out => R_out);
 
 ones : decade_counter port map (EN => enable, RESET => reset, INCREMENT => fsm_clk, COUNT => COUNT_1, TICK => ones_to_tens);
 tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_to_tens, COUNT => COUNT_2, TICK => tens_to_hunds);

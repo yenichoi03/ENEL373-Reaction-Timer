@@ -26,8 +26,6 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
-          op_en : in STD_LOGIC;                     -- Enable/disable ALU functions 
-          op_done : out STD_LOGIC;                  -- Indicates if ALU operation is finished (Where would this output go?)
           A: in integer;      -- time
           B: in integer;    --time
           C: in integer;     -- time

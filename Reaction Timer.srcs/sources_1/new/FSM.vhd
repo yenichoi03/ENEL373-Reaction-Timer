@@ -23,11 +23,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity FSM is
-    Port ( CLK, RST, op_done: in STD_LOGIC;
+    Port ( CLK, RST: in STD_LOGIC;
            BTNC, BTNU, BTND, BTNL, BTNR  : in STD_LOGIC := '0';
            op : out STD_LOGIC_VECTOR(2 downto 0) := "000";
-           A, B : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-           R : in STD_LOGIC_VECTOR(15 downto 0);                               
+           CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+           RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
            counter_en, counter_rst : out STD_LOGIC := '0'; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
@@ -35,7 +35,7 @@ end FSM;
 
 architecture Behavioral of FSM is
 
-    type state is (dot_3, dot_2, dot_1, counting, calculating, print_current_time, print_best_time, print_worst_time, print_average_time);
+    type state is (dot_3, dot_2, dot_1, counting, print_current_time, print_best_time, print_worst_time, print_average_time);
     
     signal current_state, next_state : state := dot_3;
     constant T1: natural := 1000;
@@ -83,15 +83,9 @@ begin
             end if;
         when counting =>
             if BTNC = '1' then
-                next_state <= calculating;
-            else
-                next_state <= counting;
-            end if;
-        when calculating => 
-            if op_done = '1' then
                 next_state <= print_current_time;
             else
-                next_state <= calculating;
+                next_state <= counting;
             end if;
         when print_current_time =>
             if BTNC = '1' and t = 999 then
@@ -148,15 +142,6 @@ begin
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Decade counter counts
-        when calculating =>
-            counter_en <= '1';
-            counter_rst <= '0';
-            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; --Display final time
-            run_count <= std_logic_vector(unsigned(run_count) + 1);
-            --Check if new time is the best or worst time, if yes update signal (should be variable?)
-            --Put current time in A and sum in B
-            --Tell ALU to add
         when print_current_time =>
             counter_en <= '0';
             counter_rst <= '0';

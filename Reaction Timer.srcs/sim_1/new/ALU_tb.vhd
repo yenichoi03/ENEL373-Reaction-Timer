@@ -36,7 +36,6 @@ end ALU_tb;
 
 architecture Behavioral of ALU_tb is
 
-signal op_en, op_done : std_logic := '0';
 signal op : std_logic_vector (2 downto 0) := "101"; -- 001 for add, 010 for divide, 100 for compare
 signal A, B : integer := 1;
 signal C : integer := 4;
@@ -47,6 +46,6 @@ begin
 op <= "000" after 1ns;
 
 inst_ALU : entity work.ALU(Behavioral)
-port map (op_en => op_en, op_done => op_done, op => op, A=>A, B=>B, C=>C, R=>R);
+port map (op => op, A=>A, B=>B, C=>C, R=>R);
 
 end Behavioral;
