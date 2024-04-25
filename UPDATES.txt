@@ -1,3 +1,34 @@
+-- BUGS --
+* We're getting various weird display flickers and idk where they're from
+* The calculated values are all showing as 0. I strongly suspect this is related to the vec to int conversion module - probably the storage of the values in signals? 
+  currently two of the states have hard coded 4444 and 2222 values showing just to check that the fsm state was changing. the other one SHOULD be showing the worst time.
+
+-- TO DO --
+* Display codes for indicating Fastest, Slowest, Average (F, S, A)
+* Random number stuff
+
+
+EMILY (4/04/24):
+
+-- NEW CHANGES --
+* Finished the two converters
+* Created testbenches for the two converters
+* Linked the converters and ALU into the main program and FSM
+
+-- THOUGHTS --
+* Naming of things feels a bit confusing? should maybe try and clean up
+* Yeni's file wasn't linked in properly (git issues) so I just duplicated it 
+
+
+
+
+MARCUS():
+
+
+YENI():
+ALU division, subtraction and comparison would be good to do in integers. The difficult bit is converting the int into BCD.
+I will work on the ALU functions. 
+
 --CURRENT MODULES--
 
 * CLOCK DIVIDER x2
@@ -9,38 +40,3 @@
 * FSM (dot_3, dot_2, dot_1, counting, calculating, print_current_time, print_best_time, print_worst_time, print_average_time)
 * ALU
 * 16bit REGISTER x3
-
-
-EMILY (4/04/24):
-
--- NEW CHANGES --
-* Added a skeleton ALU module which will need to be able to add, divide, and compare. Realised probably need to add a subtraction functionality too.
-* Added simple registers which put value at input to output when enabled
-* Added extra button inputs and states to the FSM
-* Created a very basic ALU test bench
-* Connected registers and ALU into main
-
--- THOUGHTS --
-* I think that a good way to do the averaging is keep a running sum of times and a run count. Divide sum by run count when displaying average.
-* Need to have a think about how we syncronise stuff? thats what the op_en and op_done are for but not sure if they're optimal
-* Consider building a FIFO buffer for storing all run times? We need to subtract the oldest run off the sum once we reach max # of runs
-* Rationale for adding times to a global sum as we go is that only one or two arithmetic operation happen at a time rather than possibly heaps 
-
--- BUGS --
-* FSM tb is not currently functional because the port map is out of date but its also not very useful atm
-* That flickery display
-
--- TO DO --
-* Conversion from counter outputs to 16 bit vector and then from 16 bit result vector back into BCD for display. Either new module or inside FSM
-* ALU division, subtraction, comparison (currently using unsigned, not sure how to do signed)
-* Display codes for indicating Fastest, Slowest, Average (F, S, A)
-* Reset functionality
-* Switches used to set max runs stored number (separate module)
-* Dealing with decrementing the sum once we reach max runs + limiting run count to <= max runs
-
-MARCUS():
-
-
-YENI():
-ALU division, subtraction and comparison would be good to do in integers. The difficult bit is converting the int into BCD.
-I will work on the ALU functions. 

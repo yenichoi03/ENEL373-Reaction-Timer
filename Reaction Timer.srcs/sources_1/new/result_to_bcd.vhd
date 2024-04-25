@@ -26,20 +26,22 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Int_to_BCD is
+entity result_to_BCD is
     Port ( int_result : in integer;
            bcd_result : out std_logic_vector(15 downto 0));
-end Int_to_BCD;
+end result_to_BCD;
 
-architecture Behavioral of Int_to_BCD is
-    signal int_vector: std_logic_vector(3 downto 0):= (others => '0');
-    signal nibble: std_logic_vector(3 downto 0) := (others => '0');
-     
+architecture Behavioral of result_to_BCD is
+
 begin
-    process (int_result) is
-    begin 
-    int_vector <= std_logic_vector(to_unsigned(int_result, int_vector'length));
-    nibble <= 
+process(int_result)
+variable mils, hunds, tens, ones: INTEGER := 0;
+begin
+mils := int_result/1000;
+hunds := (int_result - mils*1000)/100;
+tens := (int_result - mils*1000 - hunds*100)/10;
+ones := (int_result - mils*1000 - hunds*100 - tens*10);
 
-    end process;
+bcd_result <= STD_LOGIC_VECTOR(to_unsigned(mils, 4)) & STD_LOGIC_VECTOR(to_unsigned(hunds, 4)) & STD_LOGIC_VECTOR(to_unsigned(tens, 4)) & STD_LOGIC_VECTOR(to_unsigned(ones, 4));
+end process;
 end Behavioral;

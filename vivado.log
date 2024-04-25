@@ -2,13 +2,13 @@
 # Vivado v2022.2 (64-bit)
 # SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
 # IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
-# Start of session at: Wed Apr 24 16:08:44 2024
-# Process ID: 3948
+# Start of session at: Thu Apr 25 21:32:05 2024
+# Process ID: 20184
 # Current directory: H:/2024/ENEL373/WedGroup17
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent3680 H:\2024\ENEL373\WedGroup17\Reaction Timer.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent22124 H:\2024\ENEL373\WedGroup17\Reaction Timer.xpr
 # Log file: H:/2024/ENEL373/WedGroup17/vivado.log
 # Journal file: H:/2024/ENEL373/WedGroup17\vivado.jou
-# Running On: ECE-ELECTRO-24, OS: Windows, CPU Frequency: 3192 MHz, CPU Physical cores: 6, Host memory: 16943 MB
+# Running On: ECE-CAE-57, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 8, Host memory: 34053 MB
 #-----------------------------------------------------------
 start_gui
 open_project {H:/2024/ENEL373/WedGroup17/Reaction Timer.xpr}
@@ -80,12 +80,1355 @@ WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216:part0:2.0 availab
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216ld:part0:2.0 available at C:/Xilinx/Vivado/2022.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu216ld/production/2.0/board.xml as part xczu59dr-ffvf1760-2-i specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670:part0:2.0 available at C:/Xilinx/Vivado/2022.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670/2.0/board.xml as part xczu67dr-fsve1156-2-i specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 available at C:/Xilinx/Vivado/2022.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670ld/1.0/board.xml as part xczu57dr-fsve1156-2-i specified in board_part file is either invalid or not available
+INFO: [Project 1-313] Project file moved from 'P:/WedGroup17' since last save.
 INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'H:/2024/ENEL373/WedGroup17/Reaction Timer.gen/sources_1'.
 Scanning sources...
 Finished scanning sources
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2022.2/data/ip'.
-open_project: Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1199.680 ; gain = 447.664
+open_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:13 . Memory (MB): peak = 1224.055 ; gain = 391.273
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+[Thu Apr 25 21:45:42 2024] Launched synth_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/runme.log
+[Thu Apr 25 21:45:42 2024] Launched impl_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/impl_1/runme.log
+open_hw_manager
+close_hw_manager
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/utils_1/imports/synth_1/temp.dcp with file H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/main.dcp
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+[Thu Apr 25 21:56:21 2024] Launched synth_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/runme.log
+[Thu Apr 25 21:56:21 2024] Launched impl_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/impl_1/runme.log
+open_hw_manager
+close_hw_manager
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd}}
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}}
+set_property top int_storage_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/FSM.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/ALU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Int_to_BCD'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/ALU_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd" into library xil_defaultlib
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+xsim: Time (s): cpu = 00:00:01 ; elapsed = 00:00:14 . Memory (MB): peak = 1317.496 ; gain = 52.434
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:02 ; elapsed = 00:00:19 . Memory (MB): peak = 1317.496 ; gain = 52.434
+run all
+run 10 us
+run 10 us
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/ALU_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1317.496 ; gain = 0.000
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+ERROR: [VRFC 10-4982] syntax error near '1' [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd:49]
+ERROR: [VRFC 10-9458] unit 'behavioral' is ignored due to previous errors [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd:39]
+INFO: [VRFC 10-8704] VHDL file 'H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd' is ignored due to errors
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/xvhdl.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/xvhdl.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1317.496 ; gain = 0.000
+run all
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 1 ns
+run 1 ns
+run 1 ns
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1317.496 ; gain = 0.000
+run 1 ns
+run 1 ns
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1317.496 ; gain = 0.000
+run 1 ns
+run 1 ns
+run 1 ns
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1317.496 ; gain = 0.000
+run 1 ns
+run 1 ns
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1317.496 ; gain = 0.000
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:08 . Memory (MB): peak = 1317.496 ; gain = 0.000
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1317.496 ; gain = 0.000
+run all
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.int_storage [int_storage_default]
+Compiling architecture behavioral of entity xil_defaultlib.int_storage_tb
+Built simulation snapshot int_storage_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "int_storage_tb_behav -key {Behavioral:sim_1:Functional:int_storage_tb} -tclbatch {int_storage_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source int_storage_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'int_storage_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:09 . Memory (MB): peak = 1317.496 ; gain = 0.000
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+set_property top Int_to_BCD [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+export_ip_user_files -of_objects  [get_files {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}}] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}}
+file delete -force {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}}
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\bcd_to_7seg.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Int_to_BCD.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\ALU.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\int_storage.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\ALU_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\FSM.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sources_1\new\Clock_Divider.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_storage_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\int_to_bcd_tb.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [H:\2024\ENEL373\WedGroup17\Reaction Timer.srcs\sim_1\new\Clock_Divider_tb.vhd:]
+INFO: [Common 17-14] Message 'filemgmt 56-199' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [Common 17-180] Spawn failed: No error
+set_property top_arch Behavioral [get_filesets sim_1]
+set_property top_file {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd} [get_filesets sim_1]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'Int_to_BCD'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'Int_to_BCD' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj Int_to_BCD_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Clock_Divider.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'clock_divider'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Decade_Counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decade_counter'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Decoder.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decoder'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Display_Counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Display_Counter'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/FSM.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/bcd_to_7seg.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'bcd_to_7seg'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/mux.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Mux'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Main.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'main'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/ALU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/register_16bit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_16bit'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Int_to_BCD'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/main_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'main_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FSM_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Clock_Divider_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'clock_divider_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Decade_Counter_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decade_counter_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Decoder_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decoder_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/mux_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Multiplex_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/ALU_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+WARNING: [VRFC 10-3608] overwriting existing secondary unit 'behavioral' [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd:39]
+INFO: [USF-XSim-69] 'compile' step finished in '3' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot Int_to_BCD_behav xil_defaultlib.Int_to_BCD -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot Int_to_BCD_behav xil_defaultlib.Int_to_BCD -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+WARNING: [VRFC 10-9427] top level unit is instantiated; use VHDL_COPY_TOP_BEFORE_STATIC_ELAB compile flag [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd:48]
+WARNING: [VRFC 10-9427] top level unit is instantiated; use VHDL_COPY_TOP_BEFORE_STATIC_ELAB compile flag [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd:48]
+ERROR: [VRFC 10-3429] illegal recursive instantiation of 'int_to_bcd_default(behavioral)' [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd:48]
+Completed static elaboration
+Starting simulation data flow analysis
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-99] Step results log file:'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1320.172 ; gain = 0.000
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/result_to_bcd.vhd} w ]
+add_files {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/result_to_bcd.vhd}}
+export_ip_user_files -of_objects  [get_files {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd}}] -no_script -reset -force -quiet
+remove_files  {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd}}
+file delete -force {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd}
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/result_to_bcd_tb.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/result_to_bcd_tb.vhd}}
+set_property top result_to_bcd_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'result_to_bcd_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'result_to_bcd_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj result_to_bcd_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Clock_Divider.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'clock_divider'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Decade_Counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decade_counter'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Decoder.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decoder'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Display_Counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Display_Counter'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/FSM.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/bcd_to_7seg.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'bcd_to_7seg'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/mux.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Mux'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Main.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'main'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/ALU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/register_16bit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_16bit'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/result_to_bcd.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'result_to_BCD'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/main_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'main_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FSM_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Clock_Divider_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'clock_divider_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Decade_Counter_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decade_counter_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Decoder_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decoder_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/mux_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Multiplex_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/ALU_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+WARNING: [VRFC 10-3608] overwriting existing secondary unit 'behavioral' [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd:39]
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/result_to_bcd_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'result_to_bcd_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '4' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot result_to_bcd_tb_behav xil_defaultlib.result_to_bcd_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot result_to_bcd_tb_behav xil_defaultlib.result_to_bcd_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.result_to_BCD [result_to_bcd_default]
+Compiling architecture behavioral of entity xil_defaultlib.result_to_bcd_tb
+Built simulation snapshot result_to_bcd_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "result_to_bcd_tb_behav -key {Behavioral:sim_1:Functional:result_to_bcd_tb} -tclbatch {result_to_bcd_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source result_to_bcd_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'result_to_bcd_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:10 . Memory (MB): peak = 1364.781 ; gain = 21.230
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/utils_1/imports/synth_1/temp.dcp with file H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/main.dcp
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+[Thu Apr 25 22:50:50 2024] Launched synth_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/runme.log
+[Thu Apr 25 22:50:50 2024] Launched impl_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/impl_1/runme.log
+open_hw_manager
+close_hw_manager
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/utils_1/imports/synth_1/temp.dcp with file H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/main.dcp
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+[Thu Apr 25 22:58:21 2024] Launched synth_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/runme.log
+[Thu Apr 25 22:58:21 2024] Launched impl_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/impl_1/runme.log
+open_hw_manager
+close_hw_manager
+set_property top FSM_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'FSM_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'FSM_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj FSM_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/FSM.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Main.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'main'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FSM_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot FSM_tb_behav xil_defaultlib.FSM_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot FSM_tb_behav xil_defaultlib.FSM_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-8944] expression has 15 elements; formal 'result' expects 16 [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FSM_tb.vhd:40]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit fsm_tb in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'FSM_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'FSM_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj FSM_tb_vhdl.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot FSM_tb_behav xil_defaultlib.FSM_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot FSM_tb_behav xil_defaultlib.FSM_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-8944] expression has 15 elements; formal 'result' expects 16 [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FSM_tb.vhd:40]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit fsm_tb in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+set_property top main_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'main_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'main_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj main_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/main_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot main_tb_behav xil_defaultlib.main_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot main_tb_behav xil_defaultlib.main_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-718] formal port <BTN> does not exist in entity <FSM>.  Please compare the definition of block <FSM> to its component declaration and its instantion to detect the mismatch. [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/main_tb.vhd:78]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit main_tb in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FFS.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FFS.vhd}}
+set_property top FSM_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'FSM_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'FSM_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj FSM_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/main_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'main_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FSM_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FFS.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot FSM_tb_behav xil_defaultlib.FSM_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot FSM_tb_behav xil_defaultlib.FSM_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-8944] expression has 15 elements; formal 'result' expects 16 [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FSM_tb.vhd:40]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit fsm_tb in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+set_property top FFS_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'FFS_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'FFS_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj FFS_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Clock_Divider.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'clock_divider'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Decade_Counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decade_counter'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Decoder.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decoder'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Display_Counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Display_Counter'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/FSM.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/bcd_to_7seg.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'bcd_to_7seg'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/mux.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Mux'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Main.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'main'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/ALU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/register_16bit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_16bit'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/int_storage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/result_to_bcd.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'result_to_BCD'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/main_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'main_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FSM_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Clock_Divider_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'clock_divider_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Decade_Counter_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decade_counter_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/Decoder_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decoder_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/mux_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Multiplex_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/ALU_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ALU_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'int_storage_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/result_to_bcd_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'result_to_bcd_tb'
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FFS.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FFS_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '4' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot FFS_tb_behav xil_defaultlib.FFS_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot FFS_tb_behav xil_defaultlib.FFS_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-8944] expression has 15 elements; formal 'result' expects 16 [H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FFS.vhd:40]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit ffs_tb in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:00:05 . Memory (MB): peak = 1390.527 ; gain = 0.000
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+set_property top int_storage_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'int_storage_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'int_storage_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-100] Fetching design files from 'sources_1'...(this may take a while)...
+INFO: [USF-XSim-101] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj int_storage_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/FSM.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'FSM'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log"
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot int_storage_tb_behav xil_defaultlib.int_storage_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+ERROR: [XSIM 43-3249] File H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd, line 42. Unresolved signal "a" is multiply driven.
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'H:/2024/ENEL373/WedGroup17/Reaction Timer.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/utils_1/imports/synth_1/temp.dcp with file H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/main.dcp
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+[Thu Apr 25 23:16:24 2024] Launched synth_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/runme.log
+[Thu Apr 25 23:16:24 2024] Launched impl_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/impl_1/runme.log
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1
+
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+[Thu Apr 25 23:18:32 2024] Launched synth_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/runme.log
+[Thu Apr 25 23:18:32 2024] Launched impl_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/impl_1/runme.log
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. PID not specified
+
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+[Thu Apr 25 23:18:50 2024] Launched synth_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/synth_1/runme.log
+[Thu Apr 25 23:18:50 2024] Launched impl_1...
+Run output will be captured here: H:/2024/ENEL373/WedGroup17/Reaction Timer.runs/impl_1/runme.log
+open_hw_manager
 exit
-INFO: [Common 17-206] Exiting Vivado at Wed Apr 24 17:03:42 2024...
+INFO: [Common 17-206] Exiting Vivado at Thu Apr 25 23:22:40 2024...

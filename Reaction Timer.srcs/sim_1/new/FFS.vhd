@@ -2,14 +2,14 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity FSM_tb is
-end FSM_tb;
+entity FFS_tb is
+end FFS_tb;
 
 -----------------------------------------------------------------
 -- Run simulation for at least 110 us (scaled by 100000) i.e. 11 seconds
 -----------------------------------------------------------------
 
-architecture Behavioral of FSM_tb is
+architecture Behavioral of FFS_tb is
 
 signal fake_clk : STD_LOGIC := '0';
 

@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Wed Apr 24 16:08:44 2024
+# Process ID: 3948
+# Current directory: H:/2024/ENEL373/WedGroup17
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent3680 H:\2024\ENEL373\WedGroup17\Reaction Timer.xpr
+# Log file: H:/2024/ENEL373/WedGroup17/vivado.log
+# Journal file: H:/2024/ENEL373/WedGroup17\vivado.jou
+# Running On: ECE-ELECTRO-24, OS: Windows, CPU Frequency: 3192 MHz, CPU Physical cores: 6, Host memory: 16943 MB
+#-----------------------------------------------------------
+start_gui
+open_project {H:/2024/ENEL373/WedGroup17/Reaction Timer.xpr}

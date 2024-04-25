@@ -97,11 +97,15 @@ Port ( CLK, RST: in STD_LOGIC;
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end component;
     
-component register_16bit is
-    Port ( CLK : in STD_LOGIC; 
-           D_IN : in STD_LOGIC_VECTOR (15 downto 0);
-           D_OUT : out STD_LOGIC_VECTOR (15 downto 0));
-    end component;
+component result_to_bcd is
+    Port ( int_result : in integer;
+           bcd_result : out std_logic_vector(15 downto 0));
+end component;
+
+component int_storage is
+    Port (  time_in : in std_logic_vector (15 downto 0);
+            time_a, time_b, time_c : out integer := 0 );
+end component;
     
 component ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
@@ -146,10 +150,9 @@ cathode_decoder : bcd_to_7seg port map (BCD => current_bcd, DP => dp_out, SEG =>
 fsm_clk_divider : clock_divider port map (CLK => CLK100MHZ, UPPERBOUND => fsm_bound, SLOWCLK => fsm_clk);
 fsm_block : FSM port map (BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
 
---register_A : register_16bit port map(CLK => op_en, D_in => A_in, D_out => A_out);
---register_B : register_16bit port map(CLK => op_en, D_in => B_in, D_out => B_out);
+count_to_int : int_storage port map(time_in => CURRENT_TIME, time_a => A, time_b => b, time_c => c);
 ALU_block : ALU port map(op =>op, A => A, B =>B, C =>C, R =>R);
---register_R : register_16bit port map(CLK => op_done, D_in => R_in, D_out => R_out);
+result_int_to_bcd : result_to_bcd port map(int_result => R, bcd_result => result);
 
 ones : decade_counter port map (EN => enable, RESET => reset, INCREMENT => fsm_clk, COUNT => COUNT_1, TICK => ones_to_tens);
 tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_to_tens, COUNT => COUNT_2, TICK => tens_to_hunds);
