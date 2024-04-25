@@ -34,7 +34,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity int_storage is
     Port (  time_in : in std_logic_vector (15 downto 0);
-            time_a, time_b, time_c : out integer := 1 );
+            time_a, time_b, time_c : out integer := 0 );
 end int_storage;
 
 architecture Behavioral of int_storage is
@@ -53,24 +53,25 @@ begin
     
     new_time <= (thous *1000) + (hunds*100) + (tens *10) + ones;
     
-    time_a <= new_time;
-    time_b <= new_time;
-    time_c <= new_time;
 
---    process(time_in) is
---    begin
---        if (count = 0) then
---            time_a <= new_time;
---            count <= count + 1;
---        elsif (count = 1) then
---            time_b <= new_time;
---            count <= count + 1;
---        elsif (count = 2) then
---            time_c <= new_time;
---            count <= 0;
---        end if;
---    end process;
+
+    process(time_in) is
+    begin
+        if (count = 0) then
+            time_a <= new_time;
+            count <= count + 1;
+        elsif (count = 1) then
+            time_b <= new_time;
+            count <= count + 1;
+        elsif (count = 2) then
+            time_c <= new_time;
+            count <= 0;
+        end if;
+    end process;
 --    time_a <= 2000;
 --    time_b <= 1000;
 --    time_c <= 3000;
+--    time_a <= new_time;
+--    time_b <= new_time;
+--    time_c <= new_time;
 end Behavioral;

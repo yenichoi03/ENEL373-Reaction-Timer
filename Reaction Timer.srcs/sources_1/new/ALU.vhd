@@ -36,7 +36,7 @@ architecture Behavioral of ALU is
 
 begin
 process(op)
-variable result : integer := 0;
+variable result : integer := 1111;
 variable num_runs : integer := 0;
 begin
 
@@ -69,7 +69,7 @@ elsif(op = "010") then -- average
     if(not(B = 0)) then 
         num_runs := num_runs + 1;
     end if;
-    if(not(B = 0)) then 
+    if(not(C = 0)) then 
         num_runs := num_runs + 1;
     end if;
     result := (A+B+C)/num_runs;

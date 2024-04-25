@@ -1,0 +1,192 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Thu Apr 25 21:32:05 2024
+# Process ID: 20184
+# Current directory: H:/2024/ENEL373/WedGroup17
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent22124 H:\2024\ENEL373\WedGroup17\Reaction Timer.xpr
+# Log file: H:/2024/ENEL373/WedGroup17/vivado.log
+# Journal file: H:/2024/ENEL373/WedGroup17\vivado.jou
+# Running On: ECE-CAE-57, OS: Windows, CPU Frequency: 2496 MHz, CPU Physical cores: 8, Host memory: 34053 MB
+#-----------------------------------------------------------
+start_gui
+open_project {H:/2024/ENEL373/WedGroup17/Reaction Timer.xpr}
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+open_hw_manager
+close_hw_manager
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+open_hw_manager
+close_hw_manager
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_storage_tb.vhd}}
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}}
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top int_storage_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+source int_storage_tb.tcl
+run all
+run 10 us
+run 10 us
+close_sim
+launch_simulation
+source int_storage_tb.tcl
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+close_sim
+launch_simulation
+launch_simulation
+source int_storage_tb.tcl
+run all
+run 10 us
+run 10 us
+run 10 us
+run 10 us
+run 1 ns
+run 1 ns
+run 1 ns
+close_sim
+launch_simulation
+source int_storage_tb.tcl
+run 1 ns
+run 1 ns
+close_sim
+launch_simulation
+source int_storage_tb.tcl
+run 1 ns
+run 1 ns
+run 1 ns
+close_sim
+launch_simulation
+source int_storage_tb.tcl
+run 1 ns
+run 1 ns
+close_sim
+launch_simulation
+source int_storage_tb.tcl
+close_sim
+launch_simulation
+source int_storage_tb.tcl
+close_sim
+launch_simulation
+source int_storage_tb.tcl
+run all
+close_sim
+launch_simulation
+source int_storage_tb.tcl
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+close_sim
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top Int_to_BCD [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+export_ip_user_files -of_objects  [get_files {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}}] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}}
+file delete -force {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/int_to_bcd_tb.vhd}}
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top_arch Behavioral [get_filesets sim_1]
+set_property top_file {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd} [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/result_to_bcd.vhd} w ]
+add_files {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/result_to_bcd.vhd}}
+export_ip_user_files -of_objects  [get_files {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd}}] -no_script -reset -force -quiet
+remove_files  {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd}}
+file delete -force {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sources_1/new/Int_to_BCD.vhd}
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/result_to_bcd_tb.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/result_to_bcd_tb.vhd}}
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top result_to_bcd_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+source result_to_bcd_tb.tcl
+close_sim
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+open_hw_manager
+close_hw_manager
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+open_hw_manager
+close_hw_manager
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top FSM_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+launch_simulation
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top main_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open {H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FFS.vhd} w ]
+add_files -fileset sim_1 {{H:/2024/ENEL373/WedGroup17/Reaction Timer.srcs/sim_1/new/FFS.vhd}}
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top FSM_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top FFS_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top int_storage_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode DisplayOnly [current_project]
+launch_simulation
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+open_hw_manager
