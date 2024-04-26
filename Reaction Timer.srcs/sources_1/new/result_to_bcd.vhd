@@ -23,12 +23,10 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity result_to_BCD is
-    Port ( int_result : in integer;
-           bcd_result : out std_logic_vector(15 downto 0));
+    Port ( int_result : in integer;                             -- Interger result from ALU 
+           bcd_result : out std_logic_vector(15 downto 0));     -- BCD conversion of resultjhf
 end result_to_BCD;
 
 architecture Behavioral of result_to_BCD is
