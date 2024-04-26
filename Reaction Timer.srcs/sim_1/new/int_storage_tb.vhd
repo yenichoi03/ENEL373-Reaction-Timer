@@ -30,22 +30,22 @@ end int_storage_tb;
 architecture Behavioral of int_storage_tb is
 
 signal t : STD_LOGIC_VECTOR(15 downto 0) := x"0000";
-signal a,b,c : INTEGER := 0;
+signal time_a, time_b, time_c : INTEGER:= 0;
 signal toggle : STD_LOGIC := '0';
 
 begin
 
 toggle <= not toggle after 5ns;
 process(toggle)
-begin
-if(toggle = '1') then
-    t <= x"6666";
-else
-    t <= x"8888";
-end if;
+    begin
+    if(toggle = '1') then
+        t <= x"6666";
+    elsif (toggle = '0') then
+        t <= x"8888";
+    end if;
 end process;
 
 inst_storage : entity work.int_storage(Behavioral)
-port map (time_in => t, time_a => A, time_b => B, time_c => C);
+port map (time_in => t, time_a => time_a, time_b => time_b, time_c => time_c);
 
 end Behavioral;

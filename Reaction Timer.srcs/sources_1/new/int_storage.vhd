@@ -23,24 +23,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity int_storage is
     Port (  time_in : in std_logic_vector (15 downto 0);
-            time_a, time_b, time_c : out integer := 0 );
+            time_a, time_b, time_c: out integer := 0);
 end int_storage;
 
 architecture Behavioral of int_storage is
     
-    signal new_time : INTEGER := 1;
-    signal ones, tens, hunds, thous : INTEGER;
+    signal new_time : INTEGER := 0;
+    signal ones, tens, hunds, thous : INTEGER := 0;
     signal count : INTEGER := 0;
     
       
