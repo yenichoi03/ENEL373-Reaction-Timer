@@ -3,3 +3,6 @@ Reaction Timer.hw/
 Reaction Timer.ip_user_files/
 Reaction Timer.sim/
 Reaction Timer.runs/
+*.jou
+*.log
+*.str
