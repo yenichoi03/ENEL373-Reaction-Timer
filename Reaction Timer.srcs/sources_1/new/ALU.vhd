@@ -35,46 +35,46 @@ end ALU;
 architecture Behavioral of ALU is
 
 begin
-process(op)
-variable result : integer := 1111;
-variable num_runs : integer := 0;
-begin
-
-if(op = "001") then --worst time
-    result := 0;
-    if(A > result) then 
-        result := A;
-    end if;
-    if (B > result) then 
-        result := B;
-    end if;
-    if (C > result) then
-        result := C;
-    end if;
-elsif(op = "100") then --best time
-    result := 99999;
-     if(A < result) then 
-        result := A;
-    end if;
-    if (B < result) then 
-        result := B;
-    end if;
-    if (C < result) then
-        result := C;
-    end if;
-elsif(op = "010") then -- average
-    if(not(A = 0)) then 
-        num_runs := num_runs + 1;
-    end if;
-    if(not(B = 0)) then 
-        num_runs := num_runs + 1;
-    end if;
-    if(not(C = 0)) then 
-        num_runs := num_runs + 1;
-    end if;
-    result := (A+B+C)/num_runs;
-end if;
-R <= result;
+    process(op)
+    variable result : integer := 1111;
+    variable num_runs : integer := 0;
+    begin
+    
+        if(op = "001") then --worst time
+            result := 0;
+            if(A > result) then 
+                result := A;
+            end if;
+            if (B > result) then 
+                result := B;
+            end if;
+            if (C > result) then
+                result := C;
+            end if;
+        elsif(op = "100") then --best time
+            result := 99999;
+             if(A < result) then 
+                result := A;
+            end if;
+            if (B < result) then 
+                result := B;
+            end if;
+            if (C < result) then
+                result := C;
+            end if;
+        elsif(op = "010") then -- average
+            if(not(A = 0)) then 
+                num_runs := num_runs + 1;
+            end if;
+            if(not(B = 0)) then 
+                num_runs := num_runs + 1;
+            end if;
+            if(not(C = 0)) then 
+                num_runs := num_runs + 1;
+            end if;
+            result := (A+B+C)/num_runs;
+        end if;
+        R <= result;
 
 end process;
 

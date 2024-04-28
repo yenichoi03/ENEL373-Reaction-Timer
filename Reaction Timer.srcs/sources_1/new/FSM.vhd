@@ -35,7 +35,7 @@ end FSM;
 
 architecture Behavioral of FSM is
 
-    type state is (dot_3, dot_2, dot_1, counting, print_current_time, print_best_time, print_worst_time, print_average_time);
+    type state is (dot_3, dot_2, dot_1, counting, print_current_time, print_best_time, print_worst_time, print_average_time, clear_time_data);
     
     signal current_state, next_state : state := dot_3;
     constant T1: natural := 1000;
@@ -43,6 +43,7 @@ architecture Behavioral of FSM is
     
     signal best_time : STD_LOGIC_VECTOR(15 downto 0) := x"0000";
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
+    signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";
     signal run_count : STD_LOGIC_VECTOR(3 downto 0) := x"0";                 
 
@@ -81,13 +82,13 @@ begin
             else
                 next_state <= dot_1;
             end if;
-        when counting =>
-            op <= "000";
+        when counting => op <= "000";
             if BTNC = '1' then
                 next_state <= print_current_time;
             else
                 next_state <= counting;
             end if;
+            
         when print_current_time =>
             if BTNC = '1' and t = 999 then
                 next_state <= dot_3;
@@ -100,9 +101,12 @@ begin
             elsif BTNR = '1' then
                 next_state <= print_average_time;
                 op <= "010";
+            elsif BTNL = '1' then
+                next_state <= clear_time_data;
             else
                 next_state <= print_current_time;
             end if;
+            
         when print_worst_time =>
             op <= "000";
             if BTNC = '1' and t = 999 then
@@ -113,6 +117,8 @@ begin
             elsif BTNR = '1' then
                 next_state <= print_average_time;
                 op <= "010";
+            elsif BTNL = '1' then
+                next_state <= clear_time_data;
             else
                 next_state <= print_worst_time;
             end if;
@@ -126,6 +132,8 @@ begin
              elsif BTNR = '1' then
                 next_state <= print_average_time;
                 op <= "010";
+             elsif BTNL = '1' then
+                next_state <= clear_time_data;
             else
                 next_state <= print_best_time;
             end if;
@@ -139,10 +147,12 @@ begin
             elsif BTNU = '1' then
                 next_state <= print_worst_time;
                 op <= "001";
+            elsif BTNL = '1' then
+                next_state <= clear_time_data;
             else
                 next_state <= print_average_time;
             end if;
-        when others =>
+        when others => 
             next_state <= current_state;
     end case;
 end process;
