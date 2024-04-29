@@ -44,9 +44,9 @@ architecture Behavioural of bcd_to_7seg is
                  when "1000" => seg(0 to 6) <= "1111111"; -- 8
                  when "1001" => seg(0 to 6) <= "1110011"; -- 9
                  when "1010" => seg(0 to 6) <= "0000000"; -- blank
-                 when "1011" => seg(0 to 6) <= "0100000"; -- max
-                 when "1100" => seg(0 to 6) <= "0000001"; -- average
-                 when "1101" => seg(0 to 6) <= "0010000"; -- min
+                 when "1011" => seg(0 to 6) <= "0001110"; -- max, longest
+                 when "1100" => seg(0 to 6) <= "1111011"; -- average
+                 when "1101" => seg(0 to 6) <= "1000111"; -- min, fastest
                  --when "1110" => seg(0 to 6) <= 
                  --when "1111" => seg(0 to 6) <= "0000000";
                 when others => seg(0 to 6) <= "0000000"; -- blank
