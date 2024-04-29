@@ -35,7 +35,7 @@ signal message : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
 begin
     fake_clk <= not fake_clk after 1ns;
     BTNC <= '1' after 1ns;
-    BTNC <= '0' after 2ns;
+    BTNC <= '0' after 2ns; -- this won't work
     BTND <= '1' after 3ns;
     test_fsm : FSM port map (BTNC => BTNC, BTNU => BTNU, BTND => BTND, BTNL => BTNL, BTNR => BTNR, CLK => fake_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message, op => op);
 

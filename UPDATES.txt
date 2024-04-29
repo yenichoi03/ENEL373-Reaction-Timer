@@ -1,9 +1,9 @@
 -- BUGS --
 * We're getting various weird display flickers and idk where they're from
 * The result is not updating. I believe this is related to the ALU calc not being triggerd. Note that currently two of the states have hard coded 4444 and 2222 values showing just to check that the fsm state was changing. the other one SHOULD be showing the worst time.
+*Simulator BTNC not being "pressed" for 1ns rather being pressed every 1ns, causes issue if being "unpressed" after 2ns.
 
 -- TO DO --
-* Display codes for indicating Fastest, Slowest, Average (F, S, A)
 * Random number stuff
 
 
@@ -22,6 +22,7 @@ EMILY (4/04/24):
 
 
 MARCUS():
+Made display codes Indicating Fastest, Longest, Average (F, L, A)
 
 
 YENI():
