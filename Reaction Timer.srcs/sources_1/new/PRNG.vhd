@@ -30,6 +30,7 @@ entity PRNG is
 end PRNG;
 
 architecture Behavioral of PRNG is
+
     signal num : integer := 0;
     
 begin
