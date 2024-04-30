@@ -44,6 +44,7 @@ signal current_bcd : STD_LOGIC_VECTOR (3 downto 0) := "0000";
 signal message : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
 signal dp_out : STD_LOGIC := '0';
 signal seg_out : STD_LOGIC_VECTOR (0 to 7);
+signal random : STD_LOGIC_VECTOR(3 downto 0);
 
 -- Timing Signals --
 signal COUNT_1,COUNT_2,COUNT_3,COUNT_4 : STD_LOGIC_VECTOR (3 downto 0) := (others => '0');
@@ -124,9 +125,12 @@ component decade_counter is
                COUNT : out STD_LOGIC_VECTOR (3 downto 0);       --An output with the current count
                TICK : out STD_LOGIC); 
     end component;
-
-
-
+    
+component PRNG is 
+        Port ( random : out STD_LOGIC_VECTOR(3 downto 0);   --Random number generator 
+               trigger : in STD_LOGIC_VECTOR (3 downto 0)); -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
+        end component;
+        
 begin  
 
 DP <= not dp_out;
@@ -161,7 +165,7 @@ tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_
 hunds : decade_counter port map (EN => enable, RESET => reset, INCREMENT => tens_to_hunds, COUNT => COUNT_3, TICK => hunds_to_mils);
 mils : decade_counter port map (EN => enable, RESET => reset, INCREMENT => hunds_to_mils, COUNT => COUNT_4, TICK => mils_to_beyond);
 
-
+number_generator : PRNG port map (trigger => current_bcd, random => random); 
 
 
 
