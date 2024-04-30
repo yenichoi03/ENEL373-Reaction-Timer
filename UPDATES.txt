@@ -1,22 +1,22 @@
 -- BUGS --
-* We're getting various weird display flickers and idk where they're from
+* New display bug when showing dots
 * The result is not updating. I believe this is related to the ALU calc not being triggerd. Note that currently two of the states have hard coded 4444 and 2222 values showing just to check that the fsm state was changing. the other one SHOULD be showing the worst time.
 *Simulator BTNC not being "pressed" for 1ns rather being pressed every 1ns, causes issue if being "unpressed" after 2ns.
 
 -- TO DO --
 * Random number stuff
+* Left button needs to clear all stored times
 
 
 EMILY (4/04/24):
 
 -- NEW CHANGES --
-* Finished the two converters
-* Created testbenches for the two converters
-* Linked the converters and ALU into the main program and FSM
+* Fixed ALU trigger issue, that is definitely linked in properly now via alu_en flag
+* Created PRNG random file
+* ALU calculations not working properly, working on that now
 
 -- THOUGHTS --
 * Naming of things feels a bit confusing? should maybe try and clean up
-* Yeni's file wasn't linked in properly (git issues) so I just duplicated it 
 
 
 

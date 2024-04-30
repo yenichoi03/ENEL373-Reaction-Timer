@@ -29,7 +29,7 @@ entity FSM is
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst : out STD_LOGIC := '0'; 
+           counter_en, counter_rst, alu_en : out STD_LOGIC := '0'; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end FSM;
 
@@ -82,25 +82,21 @@ begin
             else
                 next_state <= dot_1;
             end if;
-        when counting => op <= "000";
+        when counting => 
             if BTNC = '1' then
                 next_state <= print_current_time;
             else
                 next_state <= counting;
-            end if;
-            
+            end if;            
         when print_current_time =>
             if BTNC = '1' and t = 999 then
                 next_state <= dot_3;
             elsif BTNU = '1' then
                 next_state <= print_worst_time;
-                op <= "001";
             elsif BTND = '1' then
                 next_state <= print_best_time;
-                op <= "100";
             elsif BTNR = '1' then
                 next_state <= print_average_time;
-                op <= "010";
             elsif BTNL = '1' then
                 next_state <= clear_time_data;
             else
@@ -108,45 +104,36 @@ begin
             end if;
             
         when print_worst_time =>
-            op <= "000";
             if BTNC = '1' and t = 999 then
                 next_state <= dot_3;
             elsif BTND = '1' then
                 next_state <= print_best_time;
-                op <= "100";
             elsif BTNR = '1' then
                 next_state <= print_average_time;
-                op <= "010";
             elsif BTNL = '1' then
                 next_state <= clear_time_data;
             else
                 next_state <= print_worst_time;
             end if;
         when print_best_time =>
-            op <= "000";
             if BTNC = '1' and t = 999 then
                 next_state <= dot_3;
             elsif BTNU = '1' then
                 next_state <= print_worst_time;
-                op <= "001";
              elsif BTNR = '1' then
                 next_state <= print_average_time;
-                op <= "010";
              elsif BTNL = '1' then
                 next_state <= clear_time_data;
             else
                 next_state <= print_best_time;
             end if;
         when print_average_time =>
-            op <= "000";
             if BTNC = '1' and t = 999 then
                 next_state <= dot_3;
              elsif BTND = '1' then
                 next_state <= print_best_time;
-                op <= "100";
             elsif BTNU = '1' then
                 next_state <= print_worst_time;
-                op <= "001";
             elsif BTNL = '1' then
                 next_state <= clear_time_data;
             else
@@ -161,23 +148,37 @@ OUTPUT_DECODE: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4)
 begin
     case (current_state) is
         when dot_3 =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '0';
+            op <= "000";
             counter_en <= '0';
             counter_rst <= '1';
             message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
         when dot_2 =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '0';
+            op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
             message <= X"aaaaaaFF"; -- to modify to show two dots
         when dot_1 =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '0';
+            op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
             message <= X"aaaaaaaF"; -- to modify to show one dots
         when counting =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '0';
+            op <= "000";
             counter_en <= '1';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Decade counter counts
         when print_current_time =>
+            alu_en <= '0';
+            op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
@@ -185,13 +186,19 @@ begin
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             
         when print_best_time =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '1';
+            op <= "100";
             counter_en <= '0';
             counter_rst <= '0';
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <= x"2222";
+            message(15 downto 0) <= result; --x"2222";
             --DISPLAY SHORTEST TIME
         when print_worst_time =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '1';
+            op <= "001";
             counter_en <= '0';
             counter_rst <= '0';
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
@@ -199,14 +206,17 @@ begin
             message(15 downto 0) <= result;
             --DISPLAY LONGEST TIME
         when print_average_time =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '1';
+            op <= "010";
             counter_en <= '0';
             counter_rst <= '0';
-            -- Put sum in A
-            -- Put run_count in B
-            -- Tell ALU to divide
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <= x"4444";
+            message(15 downto 0) <= result; --x"4444";
         when others =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '0';
+            op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
             message <= X"aaaaaaaa";

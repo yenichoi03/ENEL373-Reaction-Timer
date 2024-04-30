@@ -26,20 +26,22 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
+          ALU_en : in STD_LOGIC; --activates ALU
           A: in integer;      -- time
           B: in integer;    --time
           C: in integer;     -- time
-          R: out integer);    -- result
+          R: out integer:= 1111);    -- result
 end ALU;
 
 architecture Behavioral of ALU is
 
 begin
-    process(op)
-    variable result : integer := 1111;
+    process(ALU_en)
+    variable result : integer := 0000;
     variable num_runs : integer := 0;
     begin
-    
+    result := to_integer(unsigned(op));
+    if(ALU_en ='1') then
         if(op = "001") then --worst time
             result := 0;
             if(A > result) then 
@@ -51,6 +53,7 @@ begin
             if (C > result) then
                 result := C;
             end if;
+            result := 1111;
         elsif(op = "100") then --best time
             result := 99999;
              if(A < result) then 
@@ -62,6 +65,7 @@ begin
             if (C < result) then
                 result := C;
             end if;
+        result := 2222;
         elsif(op = "010") then -- average
             if(not(A = 0)) then 
                 num_runs := num_runs + 1;
@@ -73,7 +77,10 @@ begin
                 num_runs := num_runs + 1;
             end if;
             result := (A+B+C)/num_runs;
+            result := 3333;
         end if;
+       
+    end if;
         R <= result;
 
 end process;

@@ -48,6 +48,7 @@ begin
 
     process(time_in) is
     begin
+    if not (time_in = x"0000") then
         if (count = 0) then
             time_a <= new_time;
             count <= count + 1;
@@ -58,6 +59,7 @@ begin
             time_c <= new_time;
             count <= 0;
         end if;
+    end if;
     end process;
 --    time_a <= 2000;
 --    time_b <= 1000;
