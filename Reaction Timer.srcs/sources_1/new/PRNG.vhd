@@ -21,15 +21,8 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+use IEEE.MATH_REAL.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity PRNG is
     Port ( random : out STD_LOGIC_VECTOR (3 downto 0);
@@ -37,8 +30,18 @@ entity PRNG is
 end PRNG;
 
 architecture Behavioral of PRNG is
-
 begin
-
-
+    process (trigger)
+    variable num : integer := 78;
+    
+    begin 
+        if num < 150 then
+            num := num/5;
+            num := num + 21;
+        elsif num > 150 then
+            num := num/12;
+        end if;
+        random <= std_logic_vector(to_unsigned(num, 4)) ;
+     end process;
+    
 end Behavioral;
