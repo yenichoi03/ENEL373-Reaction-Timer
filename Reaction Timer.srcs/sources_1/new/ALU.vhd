@@ -38,46 +38,46 @@ architecture Behavioral of ALU is
 begin
     process(ALU_en)
     variable result : integer := 0000;
-    variable num_runs : integer := 0;
+    variable num_runs : integer := 3;
+    variable aa : integer := 100;
+    variable bb : integer := 0;
+    variable cc : integer := 300;
+    
     begin
-    result := to_integer(unsigned(op));
+
     if(ALU_en ='1') then
         if(op = "001") then --worst time
             result := 0;
-            if(A > result) then 
-                result := A;
+            if(aa > result) then 
+                result := aa;
             end if;
-            if (B > result) then 
-                result := B;
+            if (Bb > result) then 
+                result := Bb;
             end if;
-            if (C > result) then
-                result := C;
+            if (Cc > result) then
+                result := Cc;
             end if;
-            result := 1111;
         elsif(op = "100") then --best time
             result := 99999;
-             if(A < result) then 
-                result := A;
+             if(Aa < result) then 
+                result := Aa;
             end if;
-            if (B < result) then 
-                result := B;
+            if (Bb < result) then 
+                result := Bb;
             end if;
-            if (C < result) then
-                result := C;
+            if (cC < result) then
+                result := cc;
             end if;
-        result := 2222;
         elsif(op = "010") then -- average
-            if(not(A = 0)) then 
-                num_runs := num_runs + 1;
+            if(Aa = 0 and Bb = 0 and Cc = 0) then 
+               result := 0;
+            elsif(Aa=0 xor  Bb= 0 xor Cc =0) then
+            result := (Aa+bB+cC)/2;
+            elsif(((Aa =0) and (Bb= 0))or ((Aa=0) and (Cc = 0)) or ((Bb=0) and (Cc=0))) then
+            result := (Aa+bB+cC);
+            else
+            result := (Aa+bB+cC)/3;
             end if;
-            if(not(B = 0)) then 
-                num_runs := num_runs + 1;
-            end if;
-            if(not(C = 0)) then 
-                num_runs := num_runs + 1;
-            end if;
-            result := (A+B+C)/num_runs;
-            result := 3333;
         end if;
        
     end if;
