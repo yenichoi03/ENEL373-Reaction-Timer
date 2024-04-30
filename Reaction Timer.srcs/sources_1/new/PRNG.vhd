@@ -26,20 +26,24 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity PRNG is
     Port ( random : out STD_LOGIC_VECTOR (3 downto 0);
-           trigger : in STD_LOGIC);
+           trigger : in STD_LOGIC_VECTOR (3 downto 0)); -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
 end PRNG;
 
 architecture Behavioral of PRNG is
+    signal num : integer := 0;
+    
 begin
     process (trigger)
-    variable num : integer := 78;
-    
     begin 
-        if num < 150 then
-            num := num/5;
-            num := num + 21;
-        elsif num > 150 then
-            num := num/12;
+    num <= TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
+    
+        if num > 7 then
+            num <= num - 5;
+            num <= num * 2;
+            
+        elsif num < 7 then
+            num <= num + 2;
+            num <= num * 3;
         end if;
         random <= std_logic_vector(to_unsigned(num, 4)) ;
      end process;
