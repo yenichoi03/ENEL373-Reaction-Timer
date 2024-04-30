@@ -45,7 +45,7 @@ begin
     begin
 
     if(ALU_en ='1') then
-        if(op = "001") then --worst time
+        if(op = "001") then --worst time, BTNU
             result := 0;
             if(a > result) then 
                 result := a;
@@ -56,7 +56,8 @@ begin
             if (c > result) then
                 result := c;
             end if;
-        elsif(op = "100") then --best time
+            result := a;
+        elsif(op = "100") then --best time, BTND
             result := 99999;
              if(a < result) then 
                 result := a;
@@ -67,7 +68,8 @@ begin
             if (c < result) then
                 result := c;
             end if;
-        elsif(op = "010") then -- average
+            result := c;
+        elsif(op = "010") then -- average, BTNL
             if(a = 0 and B = 0 and c = 0) then 
                result := 0;
             elsif(A=0 xor  b= 0 xor c =0) then
@@ -77,6 +79,7 @@ begin
             else
             result := (a+b+c)/3;
             end if;
+            result := b;
         end if;
        
     end if;

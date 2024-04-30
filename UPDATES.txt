@@ -1,7 +1,7 @@
 -- BUGS --
+* Select line is not cycling properly
+* there is a separate bug with storing the actual times (not coming through properly from curent time?), currently set to constnats for select debugging
 * New display bug when showing dots
-* The result is not updating. I believe this is related to the ALU calc not being triggerd. Note that currently two of the states have hard coded 4444 and 2222 values showing just to check that the fsm state was changing. the other one SHOULD be showing the worst time.
-*Simulator BTNC not being "pressed" for 1ns rather being pressed every 1ns, causes issue if being "unpressed" after 2ns.
 *Error Message a bit odd
 
 -- TO DO --
@@ -12,6 +12,7 @@
 EMILY (4/04/24):
 
 -- NEW CHANGES --
+* Added a storage select line into the fsm source code
 * ALU calculations all working properly and triggerng properly
 
 -- THOUGHTS --

@@ -30,6 +30,7 @@ entity FSM is
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
            counter_en, counter_rst, alu_en: out STD_LOGIC := '0'; 
+           sel : out STD_LOGIC_VECTOR(2 downto 0) := "000"; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end FSM;
 
@@ -44,8 +45,8 @@ architecture Behavioral of FSM is
     signal best_time : STD_LOGIC_VECTOR(15 downto 0) := x"0000";
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";
-    signal run_count : STD_LOGIC_VECTOR(3 downto 0) := x"0";                 
+    signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";   
+            
 
 begin
 
@@ -167,9 +168,12 @@ begin
 end process;
 
 OUTPUT_DECODE: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4)
+variable storage_sel : STD_LOGIC_VECTOR(2 downto 0) := "100"; 
+variable not_stored : STD_LOGIC := '0';
 begin
     case (current_state) is
         when dot_3 =>
+            not_stored := '1';
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             op <= "000";
@@ -207,6 +211,17 @@ begin
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             
+            
+            if(not_stored = '1') then
+                if(storage_sel = "100") then
+                    storage_sel := "001";
+                elsif (storage_sel = "001") then
+                    storage_sel := "010";
+                elsif (storage_sel = "010") then
+                    storage_sel := "100";
+                end if;
+                not_stored := '0';
+            end if;
         when print_best_time =>
             CURRENT_TIME <= x"0000";
             alu_en <= '1';
@@ -248,7 +263,11 @@ begin
             counter_rst <= '0';
             message <= X"aaaaaaaa";
     end case;
+sel <= storage_sel;
+    
 end process;
+
+
 
 TIMER: process (CLK)
 begin
