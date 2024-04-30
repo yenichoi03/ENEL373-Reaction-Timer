@@ -6,14 +6,13 @@
 -- TO DO --
 * Random number stuff
 * Left button needs to clear all stored times
+* Error message if button c pressed before dots disappear
 
 
 EMILY (4/04/24):
 
 -- NEW CHANGES --
-* Fixed ALU trigger issue, that is definitely linked in properly now via alu_en flag
-* Created PRNG random file
-* ALU calculations not working properly, working on that now
+* ALU calculations all working properly and triggerng properly
 
 -- THOUGHTS --
 * Naming of things feels a bit confusing? should maybe try and clean up
