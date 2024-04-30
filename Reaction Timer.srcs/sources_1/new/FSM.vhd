@@ -29,7 +29,7 @@ entity FSM is
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, store_en : out STD_LOGIC := '0'; 
+           counter_en, counter_rst, alu_en: out STD_LOGIC := '0'; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end FSM;
 
@@ -161,7 +161,6 @@ begin
     case (current_state) is
         when dot_3 =>
             CURRENT_TIME <= x"0000";
-            store_en <= '0';
             alu_en <= '0';
             op <= "000";
             counter_en <= '0';
@@ -169,7 +168,6 @@ begin
             message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
         when dot_2 =>
             CURRENT_TIME <= x"0000";
-            store_en <= '0';
             alu_en <= '0';
             op <= "000";
             counter_en <= '0';
@@ -177,7 +175,6 @@ begin
             message <= X"aaaaaaFF"; -- to modify to show two dots
         when dot_1 =>
             CURRENT_TIME <= x"0000";
-            store_en <= '0';
             alu_en <= '0';
             op <= "000";
             counter_en <= '0';
@@ -185,7 +182,6 @@ begin
             message <= X"aaaaaaaF"; -- to modify to show one dots
         when counting =>
             CURRENT_TIME <= x"0000";
-            store_en <= '0';
             alu_en <= '0';
             op <= "000";
             counter_en <= '1';
@@ -193,7 +189,6 @@ begin
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Decade counter counts
         when print_current_time =>
-            store_en <= '1';
             alu_en <= '0';
             op <= "000";
             counter_en <= '0';
@@ -204,7 +199,6 @@ begin
             
         when print_best_time =>
             CURRENT_TIME <= x"0000";
-            store_en <= '0';
             alu_en <= '1';
             op <= "100";
             counter_en <= '0';
@@ -214,7 +208,6 @@ begin
             --DISPLAY SHORTEST TIME
         when print_worst_time =>
             CURRENT_TIME <= x"0000";
-            store_en <= '0';
             alu_en <= '1';
             op <= "001";
             counter_en <= '0';
@@ -224,7 +217,6 @@ begin
             --DISPLAY LONGEST TIME
         when print_average_time =>
             CURRENT_TIME <= x"0000";
-            store_en <= '0';
             alu_en <= '1';
             op <= "010";
             counter_en <= '0';
@@ -233,7 +225,6 @@ begin
             message(15 downto 0) <= result; --x"4444";
         when others =>
             CURRENT_TIME <= x"0000";
-            store_en <= '0';
             alu_en <= '0';
             op <= "000";
             counter_en <= '0';
