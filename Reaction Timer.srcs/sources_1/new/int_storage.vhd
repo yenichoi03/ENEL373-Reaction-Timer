@@ -25,6 +25,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity int_storage is
     Port (  time_in : in std_logic_vector (15 downto 0);
+            store_en : STD_LOGIC;
             time_a, time_b, time_c: out integer := 0);
 end int_storage;
 
@@ -32,7 +33,6 @@ architecture Behavioral of int_storage is
     
     signal new_time : INTEGER := 0;
     signal last_time : INTEGER := 0;
-    signal store_en : boolean := false;
     signal ones, tens, hunds, thous : INTEGER := 0;
     signal count : INTEGER := 0;
     
@@ -49,9 +49,9 @@ begin
     
 
 
-    process(time_in) is
+    process(time_in, store_en) is
     begin
-    if not (time_in = x"0000") then
+    if not (time_in = x"0000" and store_en = '0') then
         if (count = 0) then
             time_a <= new_time;
             count <= count + 1;
