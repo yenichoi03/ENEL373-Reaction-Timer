@@ -25,8 +25,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity int_storage is
     Port (  time_in : in std_logic_vector (15 downto 0);
-            sel : in std_logic_vector(2 downto 0);
-            time_a, time_b, time_c: out integer := 0);
+            time_a, time_b, time_c: inout integer := 0);
 end int_storage;
 
 architecture Behavioral of int_storage is
@@ -42,16 +41,5 @@ begin
     ones <= TO_INTEGER(UNSIGNED(time_in(3 downto 0)));
     new_time <= (thous *1000) + (hunds*100) + (tens *10) + ones;
 
-    process(time_in, sel) is
-    begin
-    if not (time_in = x"0000") then
-        if (sel = "001") then
-            time_a <= 100;
-        elsif(sel = "010") then
-            time_b <= 500;
-        elsif (sel = "100") then
-            time_c <= 300;
-        end if;
-    end if;
-    end process;
+
 end Behavioral;

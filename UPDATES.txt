@@ -1,22 +1,20 @@
 -- BUGS --
-* Select line is not cycling properly
-* there is a separate bug with storing the actual times (not coming through properly from curent time?), currently set to constnats for select debugging
-* New display bug when showing dots
+* BCD to integer conversion in the shift register -- currently only using thousands value as an interim debugging measure
+* various display bugs, showing rs for dots?
 *Error Message a bit odd
+* Average symbol is a 9??
 
 -- TO DO --
 * Random number stuff
 * Left button needs to clear all stored times
+* need to tidy things but I am afraid to touch anything in the big modules
 
 
 EMILY (4/04/24):
 
 -- NEW CHANGES --
-* Added a storage select line into the fsm source code
+* Created a shift register to replace the int-storage module cause that was being a bitch
 * ALU calculations all working properly and triggerng properly
-
--- THOUGHTS --
-* Naming of things feels a bit confusing? should maybe try and clean up
 
 
 
