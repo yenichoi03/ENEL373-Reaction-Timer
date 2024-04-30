@@ -139,6 +139,18 @@ begin
             else
                 next_state <= print_average_time;
             end if;
+        when clear_time_data =>
+            if BTNC = '1' and t = 999 then
+                next_state <= dot_3;
+             elsif BTND = '1' then
+                next_state <= print_best_time;
+            elsif BTNU = '1' then
+                next_state <= print_worst_time;
+            elsif BTNL = '1' then
+                next_state <= clear_time_data;
+            else
+                next_state <= clear_time_data;
+            end if;
         when others => 
             next_state <= current_state;
     end case;
@@ -169,7 +181,7 @@ begin
             counter_rst <= '0';
             message <= X"aaaaaaaF"; -- to modify to show one dots
         when counting =>
-            CURRENT_TIME <= x"0000";
+            --CURRENT_TIME <= x"0000";
             alu_en <= '0';
             op <= "000";
             counter_en <= '1';
@@ -191,7 +203,6 @@ begin
             op <= "100";
             counter_en <= '0';
             counter_rst <= '0';
-            CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             message(31 downto 16) <= "1010" & "1010" & "1101" & "1010" ;
             message(15 downto 0) <= result; --x"2222";
             --DISPLAY SHORTEST TIME
@@ -201,7 +212,6 @@ begin
             op <= "001";
             counter_en <= '0';
             counter_rst <= '0';
-            CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             message(31 downto 16) <= "1010" & "1010" & "1011" & "1010" ;
             message(15 downto 0) <= result;
             --DISPLAY LONGEST TIME

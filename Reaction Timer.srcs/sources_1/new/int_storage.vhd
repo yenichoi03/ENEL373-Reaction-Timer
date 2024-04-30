@@ -31,11 +31,14 @@ end int_storage;
 architecture Behavioral of int_storage is
     
     signal new_time : INTEGER := 0;
+    signal last_time : INTEGER := 0;
+    signal store_en : boolean := false;
     signal ones, tens, hunds, thous : INTEGER := 0;
     signal count : INTEGER := 0;
     
       
 begin
+
 
     thous <= TO_INTEGER(UNSIGNED(time_in(15 downto 12)));
     hunds <= TO_INTEGER(UNSIGNED(time_in(11 downto 8)));
@@ -61,6 +64,7 @@ begin
         end if;
     end if;
     end process;
+
 --    time_a <= 2000;
 --    time_b <= 1000;
 --    time_c <= 3000;
