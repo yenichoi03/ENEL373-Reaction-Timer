@@ -2,11 +2,11 @@
 * New display bug when showing dots
 * The result is not updating. I believe this is related to the ALU calc not being triggerd. Note that currently two of the states have hard coded 4444 and 2222 values showing just to check that the fsm state was changing. the other one SHOULD be showing the worst time.
 *Simulator BTNC not being "pressed" for 1ns rather being pressed every 1ns, causes issue if being "unpressed" after 2ns.
+*Error Message a bit odd
 
 -- TO DO --
 * Random number stuff
 * Left button needs to clear all stored times
-* Error message if button c pressed before dots disappear
 
 
 EMILY (4/04/24):
@@ -21,7 +21,7 @@ EMILY (4/04/24):
 
 
 MARCUS():
-Made display codes Indicating Fastest, Longest, Average (F, L, A)
+Added Error message, the display isn't quite right. Worked on int storage
 
 
 YENI():

@@ -35,7 +35,7 @@ end FSM;
 
 architecture Behavioral of FSM is
 
-    type state is (dot_3, dot_2, dot_1, counting, print_current_time, print_best_time, print_worst_time, print_average_time, clear_time_data);
+    type state is (dot_3, dot_2, dot_1, counting, print_current_time, print_best_time, print_worst_time, print_average_time, clear_time_data, error);
     
     signal current_state, next_state : state := dot_3;
     constant T1: natural := 1000;
@@ -73,12 +73,16 @@ begin
         when dot_2 =>
             if t = 999 then
                 next_state <= dot_1;
+            elsif BTNC = '1' then
+                next_state <= error;
             else
                 next_state <= dot_2;
             end if;
         when dot_1 =>
             if t = 999 then
                 next_state <= counting;
+            elsif BTNC = '1' then
+                next_state <= error;
             else
                 next_state <= dot_1;
             end if;
@@ -150,6 +154,12 @@ begin
                 next_state <= clear_time_data;
             else
                 next_state <= clear_time_data;
+            end if;
+        when error =>
+            if BTNC = '1' then
+                next_state <= dot_3;
+            else
+                next_state <= error;
             end if;
         when others => 
             next_state <= current_state;
@@ -223,6 +233,13 @@ begin
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1100" & "1010" ;
             message(15 downto 0) <= result; --x"4444";
+        when error =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '0';
+            op <= "000";
+            counter_en <= '0';
+            counter_rst <= '0';
+            message <= X"aaa3FFEF"; -- display error
         when others =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
