@@ -38,45 +38,44 @@ architecture Behavioral of ALU is
 begin
     process(ALU_en)
     variable result : integer := 0000;
-    variable num_runs : integer := 3;
-    variable aa : integer := 100;
-    variable bb : integer := 0;
-    variable cc : integer := 300;
+--    variable aa : integer := 100;
+--    variable bb : integer := 500;
+--    variable cc : integer := 300;
     
     begin
 
     if(ALU_en ='1') then
         if(op = "001") then --worst time
             result := 0;
-            if(aa > result) then 
-                result := aa;
+            if(a > result) then 
+                result := a;
             end if;
-            if (Bb > result) then 
-                result := Bb;
+            if (a > result) then 
+                result := a;
             end if;
-            if (Cc > result) then
-                result := Cc;
+            if (c > result) then
+                result := c;
             end if;
         elsif(op = "100") then --best time
             result := 99999;
-             if(Aa < result) then 
-                result := Aa;
+             if(a < result) then 
+                result := a;
             end if;
-            if (Bb < result) then 
-                result := Bb;
+            if (b < result) then 
+                result := b;
             end if;
-            if (cC < result) then
-                result := cc;
+            if (c < result) then
+                result := c;
             end if;
         elsif(op = "010") then -- average
-            if(Aa = 0 and Bb = 0 and Cc = 0) then 
+            if(a = 0 and B = 0 and c = 0) then 
                result := 0;
-            elsif(Aa=0 xor  Bb= 0 xor Cc =0) then
-            result := (Aa+bB+cC)/2;
-            elsif(((Aa =0) and (Bb= 0))or ((Aa=0) and (Cc = 0)) or ((Bb=0) and (Cc=0))) then
-            result := (Aa+bB+cC);
+            elsif(A=0 xor  b= 0 xor c =0) then
+            result := (a+b+c)/2;
+            elsif(((a =0) and (b= 0))or ((a=0) and (c = 0)) or ((b=0) and (c=0))) then
+            result := (a+b+c);
             else
-            result := (Aa+bB+cC)/3;
+            result := (a+b+c)/3;
             end if;
         end if;
        

@@ -192,7 +192,7 @@ begin
             counter_en <= '0';
             counter_rst <= '0';
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
-            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            message(31 downto 16) <= "1010" & "1010" & "1101" & "1010" ;
             message(15 downto 0) <= result; --x"2222";
             --DISPLAY SHORTEST TIME
         when print_worst_time =>
@@ -202,7 +202,7 @@ begin
             counter_en <= '0';
             counter_rst <= '0';
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
-            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            message(31 downto 16) <= "1010" & "1010" & "1011" & "1010" ;
             message(15 downto 0) <= result;
             --DISPLAY LONGEST TIME
         when print_average_time =>
@@ -211,7 +211,7 @@ begin
             op <= "010";
             counter_en <= '0';
             counter_rst <= '0';
-            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            message(31 downto 16) <= "1010" & "1010" & "1100" & "1010" ;
             message(15 downto 0) <= result; --x"4444";
         when others =>
             CURRENT_TIME <= x"0000";
