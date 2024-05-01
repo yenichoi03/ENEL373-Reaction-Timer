@@ -20,7 +20,7 @@
 
 
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_1164.ALL; 
 
 
 entity PRNG_tb is
@@ -30,7 +30,7 @@ architecture Behavioral of PRNG_tb is
     signal trigger : STD_LOGIC_VECTOR (3 downto 0) := "1111";
     signal random : STD_LOGIC_VECTOR (3 downto 0);
     signal prng_en : std_logic := '1';
-    signal trigger_prev : std_logic_vector(3 downto 0) := "1010";
+    signal trigger_prev : std_logic_vector(3 downto 0);
    
 begin
     inst_PRNG : entity work.PRNG(Behavioral)

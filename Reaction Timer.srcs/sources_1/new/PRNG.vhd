@@ -37,10 +37,10 @@ architecture Behavioral of PRNG is
     signal initial_num : std_logic_vector := "1010";
     
 begin
-    process (trigger, prng_en)
+    process (trigger, trigger_prev, prng_en)
     begin 
     num <= TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
-    random <= initial_num;
+    random <= trigger_prev;
         if num > 7 then
             num <= num - 5;
             num <= num * 2;

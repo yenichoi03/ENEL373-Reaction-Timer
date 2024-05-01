@@ -50,13 +50,16 @@ signal random : STD_LOGIC_VECTOR(3 downto 0);
 signal COUNT_1,COUNT_2,COUNT_3,COUNT_4 : STD_LOGIC_VECTOR (3 downto 0) := (others => '0');
 signal ones_to_tens, tens_to_hunds, hunds_to_mils, mils_to_beyond : STD_LOGIC :=  '0';
 signal enable, reset,global_rst : STD_LOGIC := '0';
-signal prng_en : std_logic := '1';
 
 -- Arithmetic Signals --
 signal op      : STD_LOGIC_VECTOR (2 downto 0);
 signal alu_en, shift_en  : STD_LOGIC;
 signal CURRENT_TIME, RESULT : STD_LOGIC_VECTOR (15 downto 0);
 signal A, B, C, R, A_prev, B_prev : integer;
+
+-- Psedo Random Number Generator Signals -- 
+signal prng_en : std_logic := '1';
+signal trigger_prev : std_logic_vector (3 downto 0);
 
 --COMPONENT DECLARATIONS--
 
