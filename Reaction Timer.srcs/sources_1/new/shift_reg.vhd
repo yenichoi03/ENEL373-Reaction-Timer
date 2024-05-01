@@ -67,3 +67,36 @@ end process;
 
 
 end Behavioral;
+
+architecture better of shift_reg is
+
+thous <= TO_INTEGER(UNSIGNED(time_in(15 downto 12)))*1000;
+hunds <= TO_INTEGER(UNSIGNED(time_in(11 downto 8)))*100;
+tens <= TO_INTEGER(UNSIGNED(time_in(7 downto 4)))*10;
+ones <= TO_INTEGER(UNSIGNED(time_in(3 downto 0)))*1;
+new_time <= thous + hunds + tens + ones;
+
+signal A_temp, B_temp, C_temp : Integer := 0;
+
+process(shift_en, reset)
+
+begin
+
+if(reset = '1') then
+C_temp <= 0;
+B_temp <= 0;
+A_temp <= 0;
+
+elsif(rising_edge(shift_en)) then
+C_temp <= B_temp;
+B_temp <= A_temp;
+A_temp <= new_time;
+end if;
+
+end process
+
+A <= A_temp;
+B <= B_temp;
+C <= C_temp;
+
+end better;
