@@ -33,7 +33,7 @@ architecture Behavioral of main is
 
 -- Clock Signals --
 
-signal disp_bound : STD_LOGIC_VECTOR (27 downto 0) := x"00003E8";
+signal disp_bound : STD_LOGIC_VECTOR (27 downto 0) := x"0000111";
 signal fsm_bound : STD_LOGIC_VECTOR (27 downto 0) := x"000C350";
 signal disp_clk, fsm_clk : STD_LOGIC := '0';
 
@@ -59,7 +59,7 @@ signal A, B, C, R, A_prev, B_prev : integer;
 
 -- Psedo Random Number Generator Signals -- 
 signal prng_en : std_logic := '1';
-signal trigger, trigger_prev : std_logic_vector (3 downto 0);
+signal trigger : std_logic_vector (3 downto 0);
 
 --COMPONENT DECLARATIONS--
 
@@ -142,7 +142,6 @@ component decade_counter is
 component PRNG is 
         Port ( random : out STD_LOGIC_VECTOR(3 downto 0);   --Random number generator 
                trigger : in STD_LOGIC_VECTOR (3 downto 0);
-               trigger_prev : in std_logic_vector(3 downto 0);
                prng_en : in std_logic); -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
         end component;
         

@@ -33,6 +33,8 @@ architecture Behavioral of PRNG_tb is
    
 begin
 
+trigger <= "1010" after 150ms; 
+trigger <= "1011" after 300ms;  
 
 inst_PRNG : entity work.PRNG(Behavioral)
 port map (trigger => trigger, random => random, prng_en => prng_en);
