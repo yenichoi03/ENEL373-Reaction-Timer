@@ -46,12 +46,12 @@ signal thous, hunds, tens, ones : INTEGER := 0;
     
 begin
 
-thous <= TO_INTEGER(UNSIGNED(time_in(15 downto 12)));
-hunds <= TO_INTEGER(UNSIGNED(time_in(11 downto 8)));
-tens <= TO_INTEGER(UNSIGNED(time_in(7 downto 4)));
-ones <= TO_INTEGER(UNSIGNED(time_in(3 downto 0)));
---new_time <= (thous *1000) + (hunds*100) + (tens *10) + ones;
-new_time <= thous*1000;
+thous <= TO_INTEGER(UNSIGNED(time_in(15 downto 12)))*1000;
+hunds <= TO_INTEGER(UNSIGNED(time_in(11 downto 8)))*100;
+tens <= TO_INTEGER(UNSIGNED(time_in(7 downto 4)))*10;
+ones <= TO_INTEGER(UNSIGNED(time_in(3 downto 0)))*1;
+
+new_time <= thous + hunds + tens + ones;
 
 process(shift_en)
 
