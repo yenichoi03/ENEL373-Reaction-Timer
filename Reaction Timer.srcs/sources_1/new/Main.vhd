@@ -33,7 +33,7 @@ architecture Behavioral of main is
 
 -- Clock Signals --
 
-signal disp_bound : STD_LOGIC_VECTOR (27 downto 0) := x"00003E8";
+signal disp_bound : STD_LOGIC_VECTOR (27 downto 0) := x"0000111";
 signal fsm_bound : STD_LOGIC_VECTOR (27 downto 0) := x"000C350";
 signal disp_clk, fsm_clk : STD_LOGIC := '0';
 
@@ -59,7 +59,7 @@ signal A, B, C, R, A_prev, B_prev : integer;
 
 -- Psedo Random Number Generator Signals -- 
 signal prng_en : std_logic := '1';
-signal trigger, trigger_prev : std_logic_vector (3 downto 0);
+signal trigger : std_logic_vector (3 downto 0);
 
 --COMPONENT DECLARATIONS--
 
@@ -180,7 +180,7 @@ tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_
 hunds : decade_counter port map (EN => enable, RESET => reset, INCREMENT => tens_to_hunds, COUNT => COUNT_3, TICK => hunds_to_mils);
 mils : decade_counter port map (EN => enable, RESET => reset, INCREMENT => hunds_to_mils, COUNT => COUNT_4, TICK => mils_to_beyond);
 
-number_generator : PRNG port map (trigger => current_bcd, random => random, prng_en => prng_en, trigger_prev => trigger); 
+number_generator : PRNG port map (trigger => current_bcd, random => random, prng_en => prng_en); 
 
 
 
