@@ -36,11 +36,10 @@ architecture Behavioral of PRNG is
 begin
 
     process (trigger, prng_en)
-    variable prev_1 : std_logic_vector := "1111";
     
     begin 
     if (trigger = "U") then
-        random <= prev_1;
+        random <= "1111";
         
     elsif (trigger /= "U") then 
         num <= TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
@@ -56,7 +55,6 @@ begin
              
             if rising_edge(prng_en) then 
                 random <= std_logic_vector(to_unsigned(num, 4));
---                prev_1 := std_logic_vector(to_unsigned(num, 4));
  
             end if; 
        end if;
