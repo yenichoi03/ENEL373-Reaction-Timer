@@ -33,7 +33,7 @@ architecture Behavioral of main is
 
 -- Clock Signals --
 
-signal disp_bound : STD_LOGIC_VECTOR (27 downto 0) := x"0000111";
+signal disp_bound : STD_LOGIC_VECTOR (27 downto 0) := x"00003E8";
 signal fsm_bound : STD_LOGIC_VECTOR (27 downto 0) := x"000C350";
 signal disp_clk, fsm_clk : STD_LOGIC := '0';
 

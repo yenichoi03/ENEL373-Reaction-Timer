@@ -68,6 +68,8 @@ begin
         when dot_3 =>
             if t = 999 then
                 next_state <= dot_2;
+            elsif BTNC = '1' and t = 300 then
+                next_state <= error;
             else
                 next_state <= dot_3;
             end if;
@@ -158,7 +160,7 @@ begin
                 next_state <= clear_time_data;
             end if;
         when error =>
-            if BTNC = '1' then
+            if BTNC = '1' and t = 999 then
                 next_state <= dot_3;
             else
                 next_state <= error;
@@ -249,7 +251,7 @@ begin
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
-            message <= X"aaa3FFEF"; -- display error
+            message <= x"aaa3EE0E"; -- display error
         when others =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
