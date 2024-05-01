@@ -29,9 +29,11 @@ end PRNG_tb;
 architecture Behavioral of PRNG_tb is
     signal trigger : STD_LOGIC_VECTOR (3 downto 0) := "1111";
     signal random : STD_LOGIC_VECTOR (3 downto 0);
+    signal prng_en : std_logic := '1';
+    signal trigger_prev : std_logic_vector(3 downto 0) := "1010";
    
 begin
     inst_PRNG : entity work.PRNG(Behavioral)
-    port map (trigger => trigger, random => random);
+    port map (trigger => trigger, random => random, prng_en => prng_en, trigger_prev => trigger_prev);
 
 end Behavioral;

@@ -50,6 +50,7 @@ signal random : STD_LOGIC_VECTOR(3 downto 0);
 signal COUNT_1,COUNT_2,COUNT_3,COUNT_4 : STD_LOGIC_VECTOR (3 downto 0) := (others => '0');
 signal ones_to_tens, tens_to_hunds, hunds_to_mils, mils_to_beyond : STD_LOGIC :=  '0';
 signal enable, reset,global_rst : STD_LOGIC := '0';
+signal prng_en : std_logic := '1';
 
 -- Arithmetic Signals --
 signal op      : STD_LOGIC_VECTOR (2 downto 0);
@@ -137,7 +138,9 @@ component decade_counter is
     
 component PRNG is 
         Port ( random : out STD_LOGIC_VECTOR(3 downto 0);   --Random number generator 
-               trigger : in STD_LOGIC_VECTOR (3 downto 0)); -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
+               trigger : in STD_LOGIC_VECTOR (3 downto 0);
+               trigger_prev : in std_logic_vector(3 downto 0);
+               prng_en : in std_logic); -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
         end component;
         
 begin  
@@ -174,7 +177,7 @@ tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_
 hunds : decade_counter port map (EN => enable, RESET => reset, INCREMENT => tens_to_hunds, COUNT => COUNT_3, TICK => hunds_to_mils);
 mils : decade_counter port map (EN => enable, RESET => reset, INCREMENT => hunds_to_mils, COUNT => COUNT_4, TICK => mils_to_beyond);
 
-number_generator : PRNG port map (trigger => current_bcd, random => random); 
+number_generator : PRNG port map (trigger => current_bcd, random => random, prng_en => prng_en, trigger_prev => trigger_prev); 
 
 
 
