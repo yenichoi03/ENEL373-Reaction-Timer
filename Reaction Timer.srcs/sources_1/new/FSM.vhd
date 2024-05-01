@@ -45,6 +45,8 @@ architecture Behavioral of FSM is
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";   
+
+    -- Make global? CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
     
     
             
