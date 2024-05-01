@@ -150,12 +150,6 @@ begin
         when clear_time_data =>
             if BTNC = '1' and t = 999 then
                 next_state <= dot_3;
-             elsif BTND = '1' then
-                next_state <= print_best_time;
-            elsif BTNU = '1' then
-                next_state <= print_worst_time;
-            elsif BTNL = '1' then
-                next_state <= clear_time_data;
             else
                 next_state <= clear_time_data;
             end if;
@@ -214,7 +208,7 @@ begin
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
+            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- DISPLAY MOST RECENT TIME
         when print_best_time =>
             CURRENT_TIME <= x"0000";
             alu_en <= '1';
@@ -223,8 +217,7 @@ begin
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1101" & "1010" ;
-            message(15 downto 0) <= result; --x"2222";
-            --DISPLAY SHORTEST TIME
+            message(15 downto 0) <= result; --DISPLAY SHORTEST TIME
         when print_worst_time =>
             CURRENT_TIME <= x"0000";
             alu_en <= '1';
@@ -232,9 +225,8 @@ begin
             op <= "001";
             counter_en <= '0';
             counter_rst <= '0';
-            message(31 downto 16) <= "1010" & "1010" & "1011" & "1010" ;
-            message(15 downto 0) <= result;
-            --DISPLAY LONGEST TIME
+            message(31 downto 16) <= "1010" & "1010" & "0101" & "1010" ;
+            message(15 downto 0) <= result; --DISPLAY LONGEST TIME
         when print_average_time =>
             CURRENT_TIME <= x"0000";
             alu_en <= '1';
@@ -243,7 +235,16 @@ begin
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1100" & "1010" ;
-            message(15 downto 0) <= result; --x"4444";
+            message(15 downto 0) <= result; -- DISPLAY AVG TIME
+        when clear_time_data =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '0';
+            shift_en <= '1';
+            op <= "000";
+            counter_en <= '0';
+            counter_rst <= '0';
+            message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
+            message(15 downto 0) <= x"aEEE";            
         when error =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
@@ -251,7 +252,7 @@ begin
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
-            message <= x"aaa3EE0E"; -- display error
+            message <= x"aaa3EEBE"; -- display error
         when others =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';

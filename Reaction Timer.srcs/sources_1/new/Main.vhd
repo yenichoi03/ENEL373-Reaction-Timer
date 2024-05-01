@@ -118,7 +118,7 @@ component shift_reg is
   Port ( time_in : in STD_LOGIC_VECTOR( 15 downto 0);
            A_prev, B_prev: in INTEGER;
            A, B, C : out INTEGER;
-           shift_en : in STD_LOGIC);
+           shift_en: in STD_LOGIC);
     end component;
     
     
@@ -180,7 +180,7 @@ tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_
 hunds : decade_counter port map (EN => enable, RESET => reset, INCREMENT => tens_to_hunds, COUNT => COUNT_3, TICK => hunds_to_mils);
 mils : decade_counter port map (EN => enable, RESET => reset, INCREMENT => hunds_to_mils, COUNT => COUNT_4, TICK => mils_to_beyond);
 
-number_generator : PRNG port map (trigger => current_bcd, random => random, prng_en => prng_en, trigger_prev => trigger); 
+--number_generator : PRNG port map (trigger => current_bcd, random => random, prng_en => prng_en, trigger_prev => trigger); 
 
 
 
