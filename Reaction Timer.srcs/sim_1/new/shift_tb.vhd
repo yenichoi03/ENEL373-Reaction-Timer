@@ -39,13 +39,23 @@ component shift_reg is
            shift_en, reset : in STD_LOGIC);
 end component;
 
-signal t : STD_LOGIC_VECTOR (15 downto 0):= x"7777";
+signal t : STD_LOGIC_VECTOR (15 downto 0):= x"0000";
 signal A, B, C: INTEGER := 0;
 signal shift_en, reset : STD_LOGIC := '0';
 begin
---t <= x"8888" after 5ns;
+
 shift_en <= not shift_en after 1ns;
-t <= x"8888" after 3ns;
+process
+begin
+wait for 2ns;
+t <= x"1111";
+wait for 3ns;
+t <= x"2222";
+wait for 1ns;
+t <= x"3333";
+wait for 2ns; 
+t<= x"4444";
+end process; 
 
 shift_test : shift_reg port map (reset => reset, shift_en => shift_en, A=>A, B=>B, C=>C, time_in => t);
 
