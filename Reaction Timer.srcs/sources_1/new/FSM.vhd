@@ -29,7 +29,7 @@ entity FSM is
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, shift_en: out STD_LOGIC := '0'; 
+           counter_en, counter_rst, alu_en, shift_en, shift_rst: out STD_LOGIC := '0'; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end FSM;
 
@@ -46,12 +46,14 @@ architecture Behavioral of FSM is
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";   
 
-    -- Make global? CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
+   
     
     
             
 
 begin
+
+
 
     STATE_REGISTER: process(CLK)
     begin
@@ -173,6 +175,7 @@ begin
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '1';
@@ -181,6 +184,7 @@ begin
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -189,6 +193,7 @@ begin
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -197,6 +202,7 @@ begin
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "000";
             counter_en <= '1';
             counter_rst <= '0';
@@ -206,33 +212,37 @@ begin
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '0';
             shift_en <= '1';
+            shift_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- DISPLAY MOST RECENT TIME
         when print_best_time =>
-            CURRENT_TIME <= x"0000";
+            CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '1';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "100";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1101" & "1010" ;
             message(15 downto 0) <= result; --DISPLAY SHORTEST TIME
         when print_worst_time =>
-            CURRENT_TIME <= x"0000";
+            CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '1';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "001";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "0101" & "1010" ;
             message(15 downto 0) <= result; --DISPLAY LONGEST TIME
         when print_average_time =>
-            CURRENT_TIME <= x"0000";
+            CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '1';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "010";
             counter_en <= '0';
             counter_rst <= '0';
@@ -241,7 +251,8 @@ begin
         when clear_time_data =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
-            shift_en <= '1';
+            shift_en <= '0';
+            shift_rst <= '1';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -251,6 +262,7 @@ begin
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -259,6 +271,7 @@ begin
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
+            shift_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';

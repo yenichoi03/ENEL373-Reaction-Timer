@@ -53,9 +53,9 @@ signal enable, reset,global_rst : STD_LOGIC := '0';
 
 -- Arithmetic Signals --
 signal op      : STD_LOGIC_VECTOR (2 downto 0);
-signal alu_en, shift_en  : STD_LOGIC;
+signal alu_en, shift_en, shift_rst  : STD_LOGIC;
 signal CURRENT_TIME, RESULT : STD_LOGIC_VECTOR (15 downto 0);
-signal A, B, C, R, A_prev, B_prev : integer;
+signal A, B, C, R : integer;
 
 -- Psedo Random Number Generator Signals -- 
 signal prng_en : std_logic := '1';
@@ -99,7 +99,7 @@ Port ( CLK, RST: in STD_LOGIC;
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, shift_en : out STD_LOGIC := '0';
+           counter_en, counter_rst, alu_en, shift_en, shift_rst : out STD_LOGIC := '0';
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end component;
     
@@ -116,9 +116,8 @@ end component;
     
 component shift_reg is
   Port ( time_in : in STD_LOGIC_VECTOR( 15 downto 0);
-           A_prev, B_prev: in INTEGER;
            A, B, C : out INTEGER;
-           shift_en: in STD_LOGIC);
+           shift_en, reset: in STD_LOGIC);
     end component;
     
     
@@ -168,9 +167,9 @@ cathode_decoder : bcd_to_7seg port map (BCD => current_bcd, DP => dp_out, SEG =>
 --FUNCTIONALITY MODULES--
 
 fsm_clk_divider : clock_divider port map (CLK => CLK100MHZ, UPPERBOUND => fsm_bound, SLOWCLK => fsm_clk);
-fsm_block : FSM port map ( shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
+fsm_block : FSM port map (shift_rst => shift_rst, shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
 --count_to_int : int_storage port map( time_in => CURRENT_TIME, time_a => A, time_b => b, time_c => c);
-time_shift_reg : shift_reg port map (shift_en => shift_en, A=>A, B=>B, C=>C, time_in => CURRENT_TIME, A_prev => A, B_prev => B);
+time_shift_reg : shift_reg port map (reset => shift_rst, shift_en => shift_en, A=>A, B=>B, C=>C, time_in => CURRENT_TIME);
 ALU_block : ALU port map(op =>op,alu_en => alu_en, A => A, B =>B, C =>C, R =>R);
 result_int_to_bcd : result_to_bcd port map(int_result => R, bcd_result => result);
 

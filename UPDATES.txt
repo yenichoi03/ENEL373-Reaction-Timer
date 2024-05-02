@@ -1,20 +1,17 @@
 -- BUGS --
-* BCD to integer conversion in the shift register -- currently only using thousands value as an interim debugging measure
-* various display bugs, showing rs for dots?
-*Error Message a bit odd
-* Average symbol is a 9??
+* display bugs
+
 
 -- TO DO --
 * Random number stuff
-* Left button needs to clear all stored times
 * need to tidy things but I am afraid to touch anything in the big modules
 
 
 EMILY (4/04/24):
 
 -- NEW CHANGES --
-* Created a shift register to replace the int-storage module cause that was being a bitch
-* ALU calculations all working properly and triggerng properly
+* Shift reg has a reset line
+* Error message has a lil o
 
 
 
