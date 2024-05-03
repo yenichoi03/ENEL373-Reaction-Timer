@@ -30,15 +30,15 @@ entity FSM is
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, shift_en, shift_rst: out STD_LOGIC := '0'; 
+           counter_en, counter_rst, alu_en, shift_en, shift_rst, prng_en: out STD_LOGIC := '0'; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end FSM;
 
 architecture Behavioral of FSM is
 
-    type state is (dot_3, dot_2, dot_1, counting, print_current_time, print_best_time, print_worst_time, print_average_time, clear_time_data, error);
+    type state is (dot_3, dot_2, dot_1, counting, print_current_time, print_best_time, print_worst_time, print_average_time, clear_time_data, error, idle);
     
-    signal current_state, next_state : state := dot_3;
+    signal current_state, next_state : state := idle;
     constant T1: natural := 1000;
     signal t: natural range 0 to T1 -1;
     
@@ -46,7 +46,7 @@ architecture Behavioral of FSM is
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";   
-
+    signal random : INTEGER := 999;
    
     
     
@@ -60,7 +60,7 @@ begin
     begin
         if (rising_edge(CLK)) then
             if (RST = '1') then
-                current_state <= dot_3;
+                current_state <= idle;
             else
                 current_state <= next_state;
             end if;
@@ -70,8 +70,14 @@ end process;
 NEXT_STATE_DECODE: process (current_state, t, BTNC, BTNU, BTND, BTNL, BTNR)
 begin 
     case (current_state) is
+        when idle =>
+            if BTNC = '1' then
+                next_state <= dot_3;
+            else
+                next_state <= idle;
+            end if;
         when dot_3 =>
-            if t = 999 then
+            if t = random then
                 next_state <= dot_2;
             elsif BTNC = '1' and t = 300 then
                 next_state <= error;
@@ -80,7 +86,7 @@ begin
             end if;
             
         when dot_2 =>
-            if t = 999 then
+            if t = random then
                 next_state <= dot_1;
             elsif BTNC = '1' then
                 next_state <= error;
@@ -88,7 +94,7 @@ begin
                 next_state <= dot_2;
             end if;
         when dot_1 =>
-            if t = 999 then
+            if t = random then
                 next_state <= counting;
             elsif BTNC = '1' then
                 next_state <= error;
@@ -172,11 +178,22 @@ end process;
 OUTPUT_DECODE: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4)
 begin
     case (current_state) is
+            when idle =>
+            CURRENT_TIME <= x"0000";
+            alu_en <= '0';
+            shift_en <= '0';
+            shift_rst <= '0';
+            prng_en <= '0';
+            op <= "000";
+            counter_en <= '0';
+            counter_rst <= '0';
+            message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
         when dot_3 =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '1';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '1';
@@ -186,6 +203,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '1';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -195,6 +213,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '1';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -204,6 +223,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '0';
             op <= "000";
             counter_en <= '1';
             counter_rst <= '0';
@@ -214,6 +234,7 @@ begin
             alu_en <= '0';
             shift_en <= '1';
             shift_rst <= '0';
+            prng_en <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -224,6 +245,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '0';
             op <= "100";
             counter_en <= '0';
             counter_rst <= '0';
@@ -234,6 +256,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '0';
             op <= "001";
             counter_en <= '0';
             counter_rst <= '0';
@@ -244,6 +267,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '0';
             op <= "010";
             counter_en <= '0';
             counter_rst <= '0';
@@ -254,6 +278,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '1';
+            prng_en <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -264,6 +289,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -273,6 +299,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
+            prng_en <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';

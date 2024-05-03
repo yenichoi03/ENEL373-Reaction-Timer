@@ -1,5 +1,4 @@
 -- BUGS --
-* display bugs
 
 
 -- TO DO --
@@ -17,7 +16,10 @@ EMILY (4/04/24):
 
 
 MARCUS():
-Added Error message, the display isn't quite right. Worked on int storage
+Added Idle State and setup FSM for the random number generator
+
+--Thoughts--
+The PRNG output could be an int which would set up the FSM timer best :)
 
 
 YENI():
@@ -35,3 +37,4 @@ I will work on the ALU functions.
 * FSM (dot_3, dot_2, dot_1, counting, calculating, print_current_time, print_best_time, print_worst_time, print_average_time)
 * ALU
 * 16bit REGISTER x3
+*PRNG
