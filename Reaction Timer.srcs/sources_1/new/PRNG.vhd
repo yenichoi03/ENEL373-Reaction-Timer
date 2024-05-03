@@ -57,7 +57,7 @@ begin
                 end if;  
            end if;
            
-           if rising_edge(prng_en) then 
+           if prng_en = '1' then 
                random <= std_logic_vector(to_unsigned(num, 4));
            end if;
     end if;

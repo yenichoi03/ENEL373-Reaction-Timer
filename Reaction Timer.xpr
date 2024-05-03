@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="61" Path="P:/Home/ENEL373/WedGroup17/Reaction Timer.xpr">
+<Project Version="7" Minor="61" Path="P:/WedGroup17/Reaction Timer.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="a42854bae9c34df0ba69ac8cf26615d5"/>
