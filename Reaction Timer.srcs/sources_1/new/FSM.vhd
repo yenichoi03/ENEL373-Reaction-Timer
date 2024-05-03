@@ -46,7 +46,7 @@ architecture Behavioral of FSM is
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";   
-    signal random : INTEGER := 999;
+    signal random : INTEGER := 999; -- insert the random number that is generated here
    
     
     
