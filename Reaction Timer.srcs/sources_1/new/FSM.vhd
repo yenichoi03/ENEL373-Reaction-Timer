@@ -7,6 +7,7 @@
 -- Module Name: FSM - Behavioral
 -- Project Name: 
 -- Target Devices: 
+-- Target Devices: 
 -- Tool Versions: 
 -- Description: 
 -- 

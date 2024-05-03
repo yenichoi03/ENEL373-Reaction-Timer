@@ -58,8 +58,8 @@ signal CURRENT_TIME, RESULT : STD_LOGIC_VECTOR (15 downto 0);
 signal A, B, C, R : integer;
 
 -- Psedo Random Number Generator Signals -- 
-signal prng_en : std_logic := '1';
 signal trigger : std_logic_vector (3 downto 0);
+signal prng_en : std_logic;
 
 --COMPONENT DECLARATIONS--
 
@@ -140,8 +140,8 @@ component decade_counter is
     
 component PRNG is 
         Port ( random : out STD_LOGIC_VECTOR(3 downto 0);   --Random number generator 
-               trigger : in STD_LOGIC_VECTOR (3 downto 0);
-               prng_en : in std_logic); -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
+               trigger : in STD_LOGIC_VECTOR (3 downto 0); -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
+               prng_en : in std_logic); 
         end component;
         
 begin  
@@ -178,7 +178,7 @@ tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_
 hunds : decade_counter port map (EN => enable, RESET => reset, INCREMENT => tens_to_hunds, COUNT => COUNT_3, TICK => hunds_to_mils);
 mils : decade_counter port map (EN => enable, RESET => reset, INCREMENT => hunds_to_mils, COUNT => COUNT_4, TICK => mils_to_beyond);
 
---number_generator : PRNG port map (trigger => current_bcd, random => random, prng_en => prng_en, trigger_prev => trigger); 
+number_generator : PRNG port map (trigger => current_bcd, random => random, prng_en => prng_en); 
 
 
 
