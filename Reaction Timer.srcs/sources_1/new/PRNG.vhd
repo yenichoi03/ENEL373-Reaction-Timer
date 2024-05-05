@@ -25,43 +25,28 @@ use IEEE.MATH_REAL.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity PRNG is
-    Port ( random : out STD_LOGIC_VECTOR (3 downto 0);
-           trigger : in STD_LOGIC_VECTOR (3 downto 0);
-           prng_en : in std_logic);  -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
+    Port (  clk : in std_logic;
+            prng_rst : in std_logic;  
+            random : out integer);
 end PRNG;
 
 architecture Behavioral of PRNG is
+    signal trigger : std_logic_vector(3 downto 0) := "0001";
     
 begin
 
-    process (trigger, prng_en)
-    variable num : integer range 0 to 15;       --This variable is so that we don't require a clock
+    process (clk, prng_rst)
+--    variable num : integer range 0 to 15;       --This variable is so that we don't require a clock
     
     begin 
-    if (prng_en = '1') then 
-        if (trigger = "0000") then
-            random <= "1111";
+    if (prng_rst = '1') then 
+        trigger <= "0001";      --initialised seed 
             
-        elsif (trigger /= "0000") then 
-            num := TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
-        
-                if num > 7 then
-                    num := num - 5;
-                    num := num * 2;
-                    
-                    
-                elsif num < 7 then
-                    num := num + 2;
-                    num := num * 3;
-               
-                end if;  
-           end if;
-           
-           if prng_en = '1' then 
-               random <= std_logic_vector(to_unsigned(num, 4));
-           end if;
-    end if;
-       
+    elsif rising_edge(clk) then 
+        trigger <= trigger(2 downto 0) & (trigger(3) xor trigger(1)); 
+        end if;
     end process;
+    
+    random <= TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
     
 end Behavioral;

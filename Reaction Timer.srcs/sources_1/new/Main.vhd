@@ -1,15 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity main is
     Port ( CLK100MHZ : in STD_LOGIC;
            LED : out STD_LOGIC_VECTOR (7 downto 0);
@@ -44,7 +35,6 @@ signal current_bcd : STD_LOGIC_VECTOR (3 downto 0) := "0000";
 signal message : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
 signal dp_out : STD_LOGIC := '0';
 signal seg_out : STD_LOGIC_VECTOR (0 to 7);
-signal random : STD_LOGIC_VECTOR(3 downto 0);
 
 -- Timing Signals --
 signal COUNT_1,COUNT_2,COUNT_3,COUNT_4 : STD_LOGIC_VECTOR (3 downto 0) := (others => '0');
@@ -58,8 +48,9 @@ signal CURRENT_TIME, RESULT : STD_LOGIC_VECTOR (15 downto 0);
 signal A, B, C, R : integer;
 
 -- Psedo Random Number Generator Signals -- 
-signal trigger : std_logic_vector (3 downto 0);
-signal prng_en : std_logic;
+signal clk : std_logic;
+signal prng_rst : std_logic := '1';
+signal random : integer;
 
 --COMPONENT DECLARATIONS--
 
@@ -99,7 +90,7 @@ Port ( CLK, RST: in STD_LOGIC;
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, shift_en, shift_rst, prng_en : out STD_LOGIC := '0';
+           counter_en, counter_rst, alu_en, shift_en, shift_rst, prng_rst : out STD_LOGIC := '0';
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end component;
     
@@ -139,9 +130,9 @@ component decade_counter is
     end component;
     
 component PRNG is 
-        Port ( random : out STD_LOGIC_VECTOR(3 downto 0);   --Random number generator 
-               trigger : in STD_LOGIC_VECTOR (3 downto 0); -- get this value from Mux: (BCD : out STD_LOGIC_VECTOR (3 downto 0);)
-               prng_en : in std_logic); 
+        Port (  clk : in std_logic;
+                prng_rst : in std_logic;  
+                random : out integer); 
         end component;
         
 begin  
@@ -167,7 +158,7 @@ cathode_decoder : bcd_to_7seg port map (BCD => current_bcd, DP => dp_out, SEG =>
 --FUNCTIONALITY MODULES--
 
 fsm_clk_divider : clock_divider port map (CLK => CLK100MHZ, UPPERBOUND => fsm_bound, SLOWCLK => fsm_clk);
-fsm_block : FSM port map (prng_en => prng_en, shift_rst => shift_rst, shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
+fsm_block : FSM port map (prng_rst => prng_rst, shift_rst => shift_rst, shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
 --count_to_int : int_storage port map( time_in => CURRENT_TIME, time_a => A, time_b => b, time_c => c);
 time_shift_reg : shift_reg port map (reset => shift_rst, shift_en => shift_en, A=>A, B=>B, C=>C, time_in => CURRENT_TIME);
 ALU_block : ALU port map(op =>op,alu_en => alu_en, A => A, B =>B, C =>C, R =>R);
@@ -178,7 +169,7 @@ tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_
 hunds : decade_counter port map (EN => enable, RESET => reset, INCREMENT => tens_to_hunds, COUNT => COUNT_3, TICK => hunds_to_mils);
 mils : decade_counter port map (EN => enable, RESET => reset, INCREMENT => hunds_to_mils, COUNT => COUNT_4, TICK => mils_to_beyond);
 
-number_generator : PRNG port map (trigger => current_bcd, random => random, prng_en => prng_en); 
+number_generator : PRNG port map (clk => disp_clk, prng_rst => prng_rst, random => random); 
 
 
 

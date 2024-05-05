@@ -27,21 +27,19 @@ entity PRNG_tb is
 end PRNG_tb;
 
 architecture Behavioral of PRNG_tb is
-    signal trigger : STD_LOGIC_VECTOR (3 downto 0);
-    signal random : STD_LOGIC_VECTOR (3 downto 0);
-    signal prng_en : std_logic;
+    signal clk : std_logic := '0';
+    signal random : integer;
+    signal prng_rst : std_logic := '1';
    
 begin
-process 
-    begin
-    trigger <= "1010"; 
-    wait for 10ns;
-    trigger <= "1011";  
-    wait for 10ns;
+clk <= not clk after 5ns;
 
+process (prng_rst) 
+begin
+    prng_rst <= not prng_rst after 50ns;
 end process;
 
 inst_PRNG : entity work.PRNG(Behavioral)
-port map (trigger => trigger, random => random, prng_en => prng_en);
+port map (random => random, clk => clk, prng_rst => prng_rst);
 
 end Behavioral;

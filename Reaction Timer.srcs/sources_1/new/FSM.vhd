@@ -30,7 +30,7 @@ entity FSM is
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, shift_en, shift_rst, prng_en: out STD_LOGIC := '0'; 
+           counter_en, counter_rst, alu_en, shift_en, shift_rst, prng_rst: out STD_LOGIC := '0'; 
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
 end FSM;
 
@@ -45,10 +45,8 @@ architecture Behavioral of FSM is
     signal best_time : STD_LOGIC_VECTOR(15 downto 0) := x"0000";
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";   
+    signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";
     signal random : INTEGER := 999; -- insert the random number that is generated here
-   
-    
     
             
 
@@ -57,6 +55,7 @@ begin
 
 
     STATE_REGISTER: process(CLK)
+    
     begin
         if (rising_edge(CLK)) then
             if (RST = '1') then
@@ -68,6 +67,7 @@ begin
 end process;
 
 NEXT_STATE_DECODE: process (current_state, t, BTNC, BTNU, BTND, BTNL, BTNR)
+
 begin 
     case (current_state) is
         when idle =>
@@ -183,7 +183,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '0';
+            prng_rst <= '1';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -193,7 +193,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '1';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '1';
@@ -203,7 +203,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '1';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -213,7 +213,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '1';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -223,7 +223,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '0';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '1';
             counter_rst <= '0';
@@ -234,7 +234,7 @@ begin
             alu_en <= '0';
             shift_en <= '1';
             shift_rst <= '0';
-            prng_en <= '0';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -245,7 +245,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '0';
+            prng_rst <= '0';
             op <= "100";
             counter_en <= '0';
             counter_rst <= '0';
@@ -256,7 +256,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '0';
+            prng_rst <= '0';
             op <= "001";
             counter_en <= '0';
             counter_rst <= '0';
@@ -267,7 +267,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '0';
+            prng_rst <= '0';
             op <= "010";
             counter_en <= '0';
             counter_rst <= '0';
@@ -278,7 +278,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '1';
-            prng_en <= '0';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -289,7 +289,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '0';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -299,7 +299,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_en <= '0';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
