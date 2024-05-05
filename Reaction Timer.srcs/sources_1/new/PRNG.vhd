@@ -47,6 +47,7 @@ begin
         end if;
     end process;
     
-    random <= TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
+    random <= 10 * TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
+    --random <= 500;
     
 end Behavioral;

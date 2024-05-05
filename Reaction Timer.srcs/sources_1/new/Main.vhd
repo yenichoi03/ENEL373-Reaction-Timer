@@ -91,7 +91,8 @@ Port ( CLK, RST: in STD_LOGIC;
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
            counter_en, counter_rst, alu_en, shift_en, shift_rst, prng_rst : out STD_LOGIC := '0';
-           message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" );       -- each nibble of message represent one character or digit on a 7 segment display.
+           message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" ;       -- each nibble of message represent one character or digit on a 7 segment display.
+           random : in INTEGER);
 end component;
     
 component result_to_bcd is
@@ -158,7 +159,7 @@ cathode_decoder : bcd_to_7seg port map (BCD => current_bcd, DP => dp_out, SEG =>
 --FUNCTIONALITY MODULES--
 
 fsm_clk_divider : clock_divider port map (CLK => CLK100MHZ, UPPERBOUND => fsm_bound, SLOWCLK => fsm_clk);
-fsm_block : FSM port map (prng_rst => prng_rst, shift_rst => shift_rst, shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
+fsm_block : FSM port map (random => random, prng_rst => prng_rst, shift_rst => shift_rst, shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
 --count_to_int : int_storage port map( time_in => CURRENT_TIME, time_a => A, time_b => b, time_c => c);
 time_shift_reg : shift_reg port map (reset => shift_rst, shift_en => shift_en, A=>A, B=>B, C=>C, time_in => CURRENT_TIME);
 ALU_block : ALU port map(op =>op,alu_en => alu_en, A => A, B =>B, C =>C, R =>R);

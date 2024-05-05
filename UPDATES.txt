@@ -4,6 +4,8 @@
 -- TO DO --
 * Random number stuff
 * need to tidy things but I am afraid to touch anything in the big modules
+*Make PRNG more consistent
+
 
 
 EMILY (4/04/24):
@@ -16,10 +18,7 @@ EMILY (4/04/24):
 
 
 MARCUS():
-Added Idle State and setup FSM for the random number generator
-
---Thoughts--
-The PRNG output could be an int which would set up the FSM timer best :)
+Connected FSM to PRNG
 
 
 YENI():
