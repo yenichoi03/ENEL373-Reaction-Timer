@@ -36,7 +36,6 @@ architecture Behavioral of PRNG is
 begin
 
     process (clk, prng_rst)
---    variable num : integer range 0 to 15;       --This variable is so that we don't require a clock
     
     begin 
     if (prng_rst = '1') then 
@@ -47,7 +46,6 @@ begin
         end if;
     end process;
     
-    random <= 10 * TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
-    --random <= 500;
+    random <= 500 * TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
     
 end Behavioral;

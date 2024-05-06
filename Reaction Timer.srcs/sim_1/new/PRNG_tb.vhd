@@ -33,11 +33,12 @@ architecture Behavioral of PRNG_tb is
    
 begin
 clk <= not clk after 5ns;
-
-process (prng_rst) 
+process 
 begin
-    prng_rst <= not prng_rst after 50ns;
+    wait for 10ns;
+    prng_rst <= '0'; 
 end process;
+
 
 inst_PRNG : entity work.PRNG(Behavioral)
 port map (random => random, clk => clk, prng_rst => prng_rst);

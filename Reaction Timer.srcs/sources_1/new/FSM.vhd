@@ -47,7 +47,7 @@ architecture Behavioral of FSM is
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";
-    signal r_time : INTEGER := random ; -- insert the random number that is generated here
+--    signal r_time : INTEGER := random ; -- insert the random number that is generated here
     
             
 
@@ -78,7 +78,7 @@ begin
                 next_state <= idle;
             end if;
         when dot_3 =>
-            if t = 999 then
+            if t = random then
                 next_state <= dot_2;
             elsif BTNC = '1' and t = 300 then
                 next_state <= error;
@@ -87,7 +87,7 @@ begin
             end if;
             
         when dot_2 =>
-            if t = r_time then
+            if t = random then
                 next_state <= dot_1;
             elsif BTNC = '1' then
                 next_state <= error;
@@ -95,7 +95,7 @@ begin
                 next_state <= dot_2;
             end if;
         when dot_1 =>
-            if t = r_time then
+            if t = random then
                 next_state <= counting;
             elsif BTNC = '1' then
                 next_state <= error;
@@ -184,7 +184,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '1';
+            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -194,11 +194,12 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
+            prng_rst <= '1';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '1';
             message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
+            prng_rst <= '1';
         when dot_2 =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
@@ -209,6 +210,7 @@ begin
             counter_en <= '0';
             counter_rst <= '0';
             message <= X"aaaaaaFF"; -- to modify to show two dots
+            prng_rst <= '1';
         when dot_1 =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
@@ -219,12 +221,13 @@ begin
             counter_en <= '0';
             counter_rst <= '0';
             message <= X"aaaaaaaF"; -- to modify to show one dots
+            prng_rst <= '1';
         when counting =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
+            prng_rst <= '1';
             op <= "000";
             counter_en <= '1';
             counter_rst <= '0';
@@ -235,7 +238,7 @@ begin
             alu_en <= '0';
             shift_en <= '1';
             shift_rst <= '0';
-            prng_rst <= '0';
+            prng_rst <= '1';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -246,7 +249,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
+            prng_rst <= '1';
             op <= "100";
             counter_en <= '0';
             counter_rst <= '0';
@@ -257,7 +260,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
+            prng_rst <= '1';
             op <= "001";
             counter_en <= '0';
             counter_rst <= '0';
@@ -268,7 +271,7 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
+            prng_rst <= '1';
             op <= "010";
             counter_en <= '0';
             counter_rst <= '0';
@@ -279,7 +282,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '1';
-            prng_rst <= '0';
+            prng_rst <= '1';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
