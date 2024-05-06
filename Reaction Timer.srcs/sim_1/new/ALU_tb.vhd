@@ -35,8 +35,19 @@ signal C : integer := 4;
 signal R : integer := 0;
 
 begin
+--ALU_en <= not ALU_en after 15ns; 
 
-op <= "010" after 1ns;
+process
+begin 
+
+    op <= "010";
+    wait for 5ns; 
+    op <= "100";
+    wait for 5ns;
+    op <= "001";
+    wait for 5ns;
+
+end process;
 
 inst_ALU : entity work.ALU(Behavioral)
 port map (op => op, A=>A, B=>B, C=>C, R=>R, ALU_en => ALU_en);

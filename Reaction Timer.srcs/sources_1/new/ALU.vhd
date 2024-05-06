@@ -36,7 +36,7 @@ end ALU;
 architecture Behavioral of ALU is
 
 begin
-    process(ALU_en)
+    process(ALU_en, op)
     variable result : integer := 0;
 --    variable aa : integer := 100;
 --    variable bb : integer := 500;
