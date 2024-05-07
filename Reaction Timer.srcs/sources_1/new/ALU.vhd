@@ -56,7 +56,7 @@ begin
             if (c > result) then
                 result := c;
             end if;
-            --result := a;
+            result := a;
         elsif(op = "100") then --best time, BTND
             result := 9999;
              if(a < result) then
@@ -74,7 +74,7 @@ begin
                 result := c;
                 end if;
             end if;
-            --result :=c;
+            result :=c;
         elsif(op = "010") then -- average, BTNL
             if(a = 0 and B = 0 and c = 0) then 
                result := 0;
@@ -85,7 +85,7 @@ begin
             else
             result := (a+b+c)/3;
             end if;
-            --result := b;
+            result := b;
         end if;
        
     end if;
