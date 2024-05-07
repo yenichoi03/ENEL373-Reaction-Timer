@@ -25,16 +25,18 @@ ones <= TO_INTEGER(UNSIGNED(time_in(3 downto 0)))*1;
 process(shift_en, reset)
 
 begin
-    if (falling_edge(shift_en)) then
-        A_temp <= thous + hunds + tens + ones;
-        C_temp <= B_temp;
-        B_temp <= A_temp;
-    elsif (reset = '1') then
-        C_temp <= 0;
-        B_temp <= 0;
-        A_temp <= 0;
-        
-    end if;
+if(falling_edge(shift_en))then
+    A_temp <= thous + hunds + tens + ones;
+    C_temp <= B_temp;
+    B_temp <= A_temp;
+    
+end if;
+
+if(reset = '1') then
+    C_temp <= 0;
+    B_temp <= 0;
+    A_temp <= 0;
+end if;
 
 end process;
 
