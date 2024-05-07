@@ -33,7 +33,7 @@ entity FSM is
            counter_en, counter_rst, alu_en, shift_en, shift_rst : out STD_LOGIC := '0'; 
            prng_rst : out std_logic := '1';
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" ;       -- each nibble of message represent one character or digit on a 7 segment display.
-           random : in INTEGER);
+           random : in INTEGER range 0 to 5000);
 end FSM;
 
 architecture Behavioral of FSM is
@@ -48,9 +48,9 @@ architecture Behavioral of FSM is
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";
-    signal r_time1 : INTEGER ; -- insert the random number that is generated here
-    signal r_time2 : INTEGER ;
-    signal r_time3 : INTEGER ;
+    signal r_time1 : INTEGER range 0 to 5000; -- insert the random number that is generated here
+    signal r_time2 : INTEGER range 0 to 5000;
+    signal r_time3 : INTEGER range 0 to 5000;
     
            
 begin

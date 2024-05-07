@@ -27,17 +27,17 @@ use IEEE.NUMERIC_STD.ALL;
 entity ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
           ALU_en : in STD_LOGIC; --activates ALU
-          A: in integer;      -- time
-          B: in integer;    --time
-          C: in integer;     -- time
-          R: out integer:= 1111);    -- result
+          A: in integer range 0 to 9999;      -- time
+          B: in integer range 0 to 9999;    --time
+          C: in integer range 0 to 9999;     -- time
+          R: out integer range 0 to 9999 := 1111);    -- result
 end ALU;
 
 architecture Behavioral of ALU is
 
 begin
     process(ALU_en, op)
-    variable result : integer := 0;
+    variable result : integer range 0 to 9999;
 --    variable aa : integer := 100;
 --    variable bb : integer := 500;
 --    variable cc : integer := 300;
@@ -58,7 +58,7 @@ begin
             end if;
             --result := a;
         elsif(op = "100") then --best time, BTND
-            result := 99999;
+            result := 9999;
              if(a < result) then
                 if(not(a=0)) then 
                     result := a;

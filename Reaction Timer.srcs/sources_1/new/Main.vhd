@@ -45,12 +45,12 @@ signal enable, reset,global_rst : STD_LOGIC := '0';
 signal op      : STD_LOGIC_VECTOR (2 downto 0);
 signal alu_en, shift_en, shift_rst  : STD_LOGIC;
 signal CURRENT_TIME, RESULT : STD_LOGIC_VECTOR (15 downto 0);
-signal A, B, C, R : integer;
+signal A, B, C, R : integer range 0 to 9999;
 
 -- Psedo Random Number Generator Signals -- 
 signal clk : std_logic;
 signal prng_rst : std_logic := '1';
-signal random : integer;
+signal random : integer range 0 to 5000;
 
 --COMPONENT DECLARATIONS--
 
@@ -92,11 +92,11 @@ Port ( CLK, RST: in STD_LOGIC;
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
            counter_en, counter_rst, alu_en, shift_en, shift_rst, prng_rst : out STD_LOGIC := '0';
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" ;       -- each nibble of message represent one character or digit on a 7 segment display.
-           random : in INTEGER);
+           random : in INTEGER range 0 to 5000);
 end component;
     
 component result_to_bcd is
-    Port ( int_result : in integer;
+    Port ( int_result : in integer range 0 to 5000;
            bcd_result : out std_logic_vector(15 downto 0));
 end component;
 
@@ -108,7 +108,7 @@ end component;
     
 component shift_reg is
   Port ( time_in : in STD_LOGIC_VECTOR( 15 downto 0);
-           A, B, C : out INTEGER;
+           A, B, C : out INTEGER range 0 to 9999;
            shift_en, reset: in STD_LOGIC);
     end component;
     
@@ -116,10 +116,10 @@ component shift_reg is
 component ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
           alu_en : in STD_LOGIC;
-          A: in integer;      -- time
-          B: in integer;    --time
-          C: in integer;     -- time
-          R: out integer);
+          A: in integer range 0 to 9999;      -- time
+          B: in integer range 0 to 9999;    --time
+          C: in integer range 0 to 9999;     -- time
+          R: out integer range 0 to 9999);
     end component;
    
 component decade_counter is
@@ -133,7 +133,7 @@ component decade_counter is
 component PRNG is 
         Port (  clk : in std_logic;
                 prng_rst : in std_logic;  
-                random : out integer); 
+                random : out integer range 0 to 5000); 
         end component;
         
 begin  
