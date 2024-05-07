@@ -25,7 +25,7 @@ ones <= TO_INTEGER(UNSIGNED(time_in(3 downto 0)))*1;
 process(shift_en, reset)
 
 begin
-if(falling_edge(shift_en))then
+if(rising_edge(shift_en))then
     A_temp <= thous + hunds + tens + ones;
     C_temp <= B_temp;
     B_temp <= A_temp;

@@ -27,6 +27,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity ALU is
     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
           ALU_en : in STD_LOGIC; --activates ALU
+          clk : in STD_LOGIC;
           A: in integer range 0 to 9999;      -- time
           B: in integer range 0 to 9999;    --time
           C: in integer range 0 to 9999;     -- time
@@ -44,7 +45,7 @@ begin
     
     begin
 
-    if(ALU_en ='1') then
+    if(ALU_en = '1' and rising_edge(clk)) then
         if(op = "001") then --worst time, BTNU
             result := 0;
             if(a > result) then 
