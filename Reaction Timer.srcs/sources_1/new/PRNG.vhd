@@ -27,25 +27,36 @@ use IEEE.NUMERIC_STD.ALL;
 entity PRNG is
     Port (  clk : in std_logic;
             prng_rst : in std_logic;  
-            random : out integer);
+            counter_rst : in STD_LOGIC := '0';
+            random1, random2, random3 : out integer range 0 to 5000);
 end PRNG;
 
 architecture Behavioral of PRNG is
-    signal trigger : std_logic_vector(3 downto 0) := "0001";
+    signal trigger1 : std_logic_vector(3 downto 0) := "0001";
+    signal trigger2 : std_logic_vector(3 downto 0) := "0010";
+    signal trigger3 : std_logic_vector(3 downto 0) := "0100";
     
 begin
 
-    process (clk, prng_rst)
+    process (clk, prng_rst, counter_rst)
     
     begin 
     if (prng_rst = '1') then 
-        trigger <= "0001";      --initialised seed 
+        trigger1 <= "0001";      --initialised seed 
             
     elsif rising_edge(clk) then 
-        trigger <= trigger(2 downto 0) & (trigger(3) xor trigger(1)); 
-        end if;
-    end process;
+        trigger1 <= trigger1(2 downto 0) & (trigger1(3) xor trigger1(1));
+        trigger2 <= trigger2(2 downto 0) & (trigger2(3) xor trigger2(1));
+        trigger3 <= trigger3(2 downto 0) & (trigger3(3) xor trigger3(1));
+        
+        if (counter_rst = '1') then  
+            random1 <= 500 * TO_INTEGER(UNSIGNED(trigger1(3 downto 0)));
+            random2 <= 500 * TO_INTEGER(UNSIGNED(trigger2(3 downto 0)));
+            random3 <= 500 * TO_INTEGER(UNSIGNED(trigger3(3 downto 0)));
+            end if;
+    end if;
+end process;
     
-    random <= 500 * TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
+
     
 end Behavioral;

@@ -33,7 +33,7 @@ entity FSM is
            counter_en, counter_rst, alu_en, shift_en, shift_rst : out STD_LOGIC := '0'; 
            prng_rst : out std_logic := '1';
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" ;       -- each nibble of message represent one character or digit on a 7 segment display.
-           random : in INTEGER range 0 to 5000);
+           random1, random2, random3 : in integer range 0 to 5000);
 end FSM;
 
 architecture Behavioral of FSM is
@@ -41,16 +41,16 @@ architecture Behavioral of FSM is
     type state is (dot_3, dot_2, dot_1, counting, print_current_time, print_best_time, print_worst_time, print_average_time, clear_time_data, error, idle);
     
     signal current_state, next_state : state := idle;
-    constant T1: natural := 1000;
+    constant T1: natural := 5001;
     signal t: natural range 0 to T1 -1;
     
     signal best_time : STD_LOGIC_VECTOR(15 downto 0) := x"0000";
     signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
     signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";
-    signal r_time1 : INTEGER range 0 to 5000; -- insert the random number that is generated here
-    signal r_time2 : INTEGER range 0 to 5000;
-    signal r_time3 : INTEGER range 0 to 5000;
+    signal r_time1 : INTEGER range 0 to 5000 := 999; -- insert the random number that is generated here
+    signal r_time2 : INTEGER range 0 to 5000 := 1200;
+    signal r_time3 : INTEGER range 0 to 5000 := 800;
     
            
 begin
@@ -87,7 +87,7 @@ begin
             end if;
             
         when dot_2 =>
-            if t = 999 then
+            if t = random2 then
                 next_state <= dot_1;
             elsif BTNC = '1' then
                 next_state <= error;
@@ -95,7 +95,7 @@ begin
                 next_state <= dot_2;
             end if;
         when dot_1 =>
-            if t = 999 then
+            if t = random3 then
                 next_state <= counting;
             elsif BTNC = '1' then
                 next_state <= error;
@@ -176,7 +176,7 @@ begin
     end case;
 end process;
 
-OUTPUT_DECODE: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4, random)
+OUTPUT_DECODE: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4, random1, random2, random3)
 begin
     case (current_state) is
         when idle =>
@@ -185,7 +185,7 @@ begin
             shift_en <= '0';
             shift_rst <= '0';
             prng_rst <= '0';
-            r_time3 <= random;
+            --r_time3 <= random;
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -195,7 +195,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            r_time1 <= random;
+            --r_time1 <= random;
             op <= "000";
             counter_en <= '0';
             counter_rst <= '1';
@@ -206,7 +206,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            r_time3 <= random;
+            --r_time3 <= random;
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -217,7 +217,7 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            r_time2 <= random;
+            --r_time2 <= random;
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';

@@ -28,7 +28,7 @@ end PRNG_tb;
 
 architecture Behavioral of PRNG_tb is
     signal clk : std_logic := '0';
-    signal random : integer;
+    signal random1, random2, random3 : out integer range 0 to 5000;
     signal prng_rst : std_logic := '1';
    
 begin
