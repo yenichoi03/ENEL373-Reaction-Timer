@@ -49,9 +49,8 @@ signal A, B, C, R : integer range 0 to 9999;
 
 -- Psedo Random Number Generator Signals -- 
 signal clk : std_logic;
-signal prng_rst : std_logic := '1';
 signal random1, random2, random3 : integer range 0 to 5000 := 999;
-signal counter_rst : std_logic := '1';
+signal prng_en : std_logic := '0';
 
 
 --COMPONENT DECLARATIONS--
@@ -92,7 +91,7 @@ Port ( CLK, RST: in STD_LOGIC;
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, shift_en, shift_rst, prng_rst : out STD_LOGIC := '0';
+           counter_en, prng_en, alu_en, shift_en, shift_rst: out STD_LOGIC := '0';
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" ;       -- each nibble of message represent one character or digit on a 7 segment display.
            random1, random2, random3 : in integer range 0 to 5000);
 end component;
@@ -109,7 +108,7 @@ end component;
     
     
 component shift_reg is
-  Port ( time_in : in STD_LOGIC_VECTOR( 15 downto 0);
+  Port (   time_in : in STD_LOGIC_VECTOR( 15 downto 0);
            A, B, C : out INTEGER range 0 to 9999;
            shift_en, reset: in STD_LOGIC);
     end component;
@@ -134,8 +133,7 @@ component decade_counter is
     
 component PRNG is 
         Port (  clk : in std_logic;
-                prng_rst : in std_logic;
-                counter_rst : in STD_LOGIC := '0';  
+                prng_en : in STD_LOGIC := '0';  
                 random1, random2, random3 : out integer range 0 to 5000 := 0);
         end component;
         
@@ -162,7 +160,7 @@ cathode_decoder : bcd_to_7seg port map (BCD => current_bcd, DP => dp_out, SEG =>
 --FUNCTIONALITY MODULES--
 
 fsm_clk_divider : clock_divider port map (CLK => CLK100MHZ, UPPERBOUND => fsm_bound, SLOWCLK => fsm_clk);
-fsm_block : FSM port map (random1 => random1, random2 => random2, random3 => random3, prng_rst => prng_rst, shift_rst => shift_rst, shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, COUNTER_RST => reset, MESSAGE => message);
+fsm_block : FSM port map (random1 => random1, random2 => random2, random3 => random3, shift_rst => shift_rst, shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, prng_en => prng_en, MESSAGE => message);
 --count_to_int : int_storage port map( time_in => CURRENT_TIME, time_a => A, time_b => b, time_c => c);
 time_shift_reg : shift_reg port map (reset => shift_rst, shift_en => shift_en, A=>A, B=>B, C=>C, time_in => CURRENT_TIME);
 ALU_block : ALU port map(op =>op,alu_en => alu_en, A => A, B =>B, C =>C, R =>R);
@@ -173,7 +171,7 @@ tens : decade_counter port map (EN => enable, RESET => reset, INCREMENT => ones_
 hunds : decade_counter port map (EN => enable, RESET => reset, INCREMENT => tens_to_hunds, COUNT => COUNT_3, TICK => hunds_to_mils);
 mils : decade_counter port map (EN => enable, RESET => reset, INCREMENT => hunds_to_mils, COUNT => COUNT_4, TICK => mils_to_beyond);
 
-number_generator : PRNG port map (clk => disp_clk, prng_rst => prng_rst, random1 => random1, random2 => random2, random3 => random3, counter_rst=>counter_rst); 
+number_generator : PRNG port map (clk => disp_clk, random1 => random1, random2 => random2, random3 => random3, prng_en => prng_en); 
 
 
 
