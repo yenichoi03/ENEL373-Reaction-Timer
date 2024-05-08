@@ -24,7 +24,7 @@ architecture Behavioral of main is
 
 -- Clock Signals --
 
-signal disp_bound : STD_LOGIC_VECTOR (27 downto 0) := x"0013880";
+signal disp_bound : STD_LOGIC_VECTOR (27 downto 0) := x"00249F0";
 signal fsm_bound : STD_LOGIC_VECTOR (27 downto 0) := x"000C350";
 signal disp_clk, fsm_clk : STD_LOGIC := '0';
 
@@ -115,12 +115,13 @@ component shift_reg is
     
     
 component ALU is
-    Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
-          alu_en : in STD_LOGIC;
+     Port (op : in STD_LOGIC_VECTOR(2 downto 0);     -- Selects which operation to perform
+          ALU_en : in STD_LOGIC; --activates ALU
+          clk : in STD_LOGIC;
           A: in integer range 0 to 9999;      -- time
           B: in integer range 0 to 9999;    --time
           C: in integer range 0 to 9999;     -- time
-          R: out integer range 0 to 9999);
+          R: out integer range 0 to 9999 := 1111);    -- result
     end component;
    
 component decade_counter is
@@ -163,7 +164,7 @@ fsm_clk_divider : clock_divider port map (CLK => CLK100MHZ, UPPERBOUND => fsm_bo
 fsm_block : FSM port map (random1 => random1, random2 => random2, random3 => random3, shift_rst => shift_rst, shift_en => shift_en, op => op, alu_en => alu_en, BTNC => BTNC, BTNU => BTNU,BTND => BTND,BTNL => BTNL, BTNR => BTNR, CLK => fsm_clk, RST => global_rst, RESULT => RESULT, CURRENT_TIME => CURRENT_TIME, COUNT_1 => COUNT_1, COUNT_2 => COUNT_2, COUNT_3 => COUNT_3, COUNT_4 => COUNT_4, COUNTER_EN => enable, prng_en => prng_en, MESSAGE => message);
 --count_to_int : int_storage port map( time_in => CURRENT_TIME, time_a => A, time_b => b, time_c => c);
 time_shift_reg : shift_reg port map (reset => shift_rst, shift_en => shift_en, A=>A, B=>B, C=>C, time_in => CURRENT_TIME);
-ALU_block : ALU port map(op =>op,alu_en => alu_en, A => A, B =>B, C =>C, R =>R);
+ALU_block : ALU port map(op =>op,clk => fsm_clk, alu_en => alu_en, A => A, B =>B, C =>C, R =>R);
 result_int_to_bcd : result_to_bcd port map(int_result => R, bcd_result => result);
 
 ones : decade_counter port map (EN => enable, RESET => reset, INCREMENT => fsm_clk, COUNT => COUNT_1, TICK => ones_to_tens);
