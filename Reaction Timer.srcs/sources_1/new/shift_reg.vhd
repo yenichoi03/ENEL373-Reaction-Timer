@@ -4,16 +4,16 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity shift_reg is
     Port ( time_in : in STD_LOGIC_VECTOR (15 downto 0);
-           A,B,C : out INTEGER range 0 to 9999:=0;
+           A,B,C : out INTEGER:=0;
            shift_en, reset : in STD_LOGIC);
 end shift_reg;
 
 
 architecture Behavioral of shift_reg is
 
-signal new_time : INTEGER range 0 to 9999:= 0;
-signal thous, hunds, tens, ones, part_a, part_b : INTEGER range 0 to 9999:= 0;
-signal A_temp, B_temp, C_temp : Integer range 0 to 9999:= 0;
+signal new_time : INTEGER := 0;
+signal thous, hunds, tens, ones : INTEGER := 0;
+signal A_temp, B_temp, C_temp : Integer := 0;
 
 begin
 
@@ -29,13 +29,13 @@ if(rising_edge(shift_en))then
     A_temp <= thous + hunds + tens + ones;
     C_temp <= B_temp;
     B_temp <= A_temp;
-
+    
 end if;
 
 if(reset = '1') then
-C_temp <= 0;
-B_temp <= 0;
-A_temp <= 0;
+    C_temp <= 0;
+    B_temp <= 0;
+    A_temp <= 0;
 end if;
 
 end process;
@@ -45,6 +45,9 @@ B <= B_temp;
 C <= C_temp;
 
 end Behavioral;
+
+
+
 
 --architecture Behavioral of shift_reg is
 

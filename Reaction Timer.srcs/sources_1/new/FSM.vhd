@@ -30,10 +30,10 @@ entity FSM is
            CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
            RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
            COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, shift_en, shift_rst : out STD_LOGIC := '0'; 
+           counter_en, prng_en, alu_en, shift_en, shift_rst : out STD_LOGIC := '0'; 
            prng_rst : out std_logic := '1';
            message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" ;       -- each nibble of message represent one character or digit on a 7 segment display.
-           random : in INTEGER range 0 to 5000);
+           random1, random2, random3 : in integer range 0 to 5000);
 end FSM;
 
 architecture Behavioral of FSM is
@@ -67,7 +67,7 @@ begin
         end if;
 end process;
 
-NEXT_STATE_DECODE: process (current_state, t, BTNC, BTNU, BTND, BTNL, BTNR)
+NEXT_STATE_DECODE: process (current_state, BTNC, BTNU, BTND, BTNL, BTNR)
 
 begin 
     case (current_state) is
@@ -183,7 +183,7 @@ begin
     end case;
 end process;
 
-OUTPUT_DECODE: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4, random)
+OUTPUT_DECODE: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4, random1, random2, random3)
 begin
     case (current_state) is
         when idle =>
@@ -191,21 +191,20 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
-            r_time3 <= random;
+            r_time3 <= random3;
             op <= "000";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '1';
             message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
         when dot_3 =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            r_time1 <= random;
+            r_time1 <= random1;
             op <= "000";
             counter_en <= '0';
-            counter_rst <= '1';
+            prng_en <= '0';
             message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
             
         when dot_2 =>
@@ -213,10 +212,10 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            r_time3 <= random;
+            r_time3 <= random3;
             op <= "000";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '0';
             message <= X"aaaaaaFF"; -- to modify to show two dots
 
         when dot_1 =>
@@ -224,10 +223,10 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            r_time2 <= random;
+            r_time2 <= random2;
             op <= "000";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '0';
             message <= X"aaaaaaaF"; -- to modify to show one dots
 
         when counting =>
@@ -235,10 +234,9 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '1';
-            counter_rst <= '0';
+            prng_en <= '1';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Decade counter counts           
         when buffering =>
@@ -257,10 +255,9 @@ begin
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- DISPLAY MOST RECENT TIME
         when print_best_time =>
@@ -268,10 +265,9 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "100";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1101" & "1010" ;
             message(15 downto 0) <= result; --DISPLAY SHORTEST TIME
         when print_worst_time =>
@@ -279,10 +275,9 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "001";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '0';
             message(31 downto 16) <= "1010" & "1010" & "0101" & "1010" ;
             message(15 downto 0) <= result; --DISPLAY LONGEST TIME
         when print_average_time =>
@@ -290,10 +285,9 @@ begin
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "010";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1100" & "1010" ;
             message(15 downto 0) <= result; -- DISPLAY AVG TIME
         when clear_time_data =>
@@ -301,10 +295,9 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '1';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
             message(15 downto 0) <= x"aBBB";            
         when error =>
@@ -312,7 +305,6 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -322,10 +314,9 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
-            counter_rst <= '0';
+            prng_en <= '0';
             message <= X"aaaaaaaa";
     end case;
     
@@ -333,17 +324,28 @@ end process;
 
 
 
-TIMER: process (CLK)
+TIMER1: process(CLK)
+
 begin
     if(rising_edge(CLK)) then
         if current_state /= next_state then
-            t <= 0;
-        elsif t/= T1-1 then
-            t <= t + 1;
+            t1 <= 0;
+        elsif t1/= (Time1-1) then
+            t1 <= t1 + 1;
         end if;
     end if;
 end process;
 
+TIMER2: process(CLK)
+begin
+    if(rising_edge(CLK)) then
+        if current_state /= next_state then
+            t2 <= 0;
+        elsif t2/= (Time2-1) then
+            t2 <= t2 + 1;
+        end if;
+    end if;
+end process;
 
 end Behavioral;
 
