@@ -306,7 +306,7 @@ begin
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <= x"aEEE";            
+            message(15 downto 0) <= x"aEEa";            
         when error =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
@@ -316,7 +316,7 @@ begin
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
-            message <= x"aaa3EEBE"; -- display error
+            message <= x"aaa3EEBa"; -- display error
         when others =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
