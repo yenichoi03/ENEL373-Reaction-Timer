@@ -1,21 +1,8 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 30.04.2024 12:04:53
--- Design Name: 
--- Module Name: PRNG - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
+-- Title: Pseudo Random Number Generator
+-- Authors: EWB, YYC, & MWD
+-- Date: 2024
+-- Description: This component generates a pseudorandom number on every clock edge
 ----------------------------------------------------------------------------------
 
 
@@ -25,27 +12,23 @@ use IEEE.MATH_REAL.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity PRNG is
-    Port (  clk : in std_logic;
-            prng_rst : in std_logic;  
-            random : out integer);
+    Port (  CLK : in std_logic;                               -- Clock input
+            RANDOM : out integer range 0 to 5000);            -- Pseudo random integer output 
 end PRNG;
 
 architecture Behavioral of PRNG is
-    signal trigger : std_logic_vector(3 downto 0) := "0001";
+    signal trigger : std_logic_vector(3 downto 0) := "0001";  -- Aribtrary starting seed
     
 begin
 
-    process (clk, prng_rst)
-    
+    process (clk)
     begin 
-    if (prng_rst = '1') then 
-        trigger <= "0001";      --initialised seed 
             
-    elsif rising_edge(clk) then 
+    if rising_edge(clk) then 
         trigger <= trigger(2 downto 0) & (trigger(3) xor trigger(1)); 
         end if;
     end process;
     
-    random <= 500 * TO_INTEGER(UNSIGNED(trigger(3 downto 0)));
+    random <= 500 * TO_INTEGER(UNSIGNED(trigger(3 downto 0))); -- Scaled to a reasonable delay time
     
 end Behavioral;

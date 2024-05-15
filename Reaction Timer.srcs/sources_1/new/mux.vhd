@@ -1,24 +1,31 @@
+----------------------------------------------------------------------------------
+-- Title: Display Multiplexer
+-- Authors: EWB, YYC, & MWD
+-- Date: 2024
+-- Description: This component outputs one nibble of the message based on which display is active 
+----------------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity Mux is
-    Port ( DISPLAY_SEL : in STD_LOGIC_VECTOR (2 downto 0);
-           MESSAGE : in STD_LOGIC_VECTOR (31 downto 0);
-           BCD : out STD_LOGIC_VECTOR (3 downto 0);
-           DP : out STD_LOGIC);
+    Port ( DISPLAY_SEL : in STD_LOGIC_VECTOR (2 downto 0);       -- Selects which of the 8 displays is active
+           MESSAGE : in STD_LOGIC_VECTOR (31 downto 0);          -- Overall message to be displayed 
+           BCD : out STD_LOGIC_VECTOR (3 downto 0);              -- Character to be displayed on the selected display
+           DP : out STD_LOGIC);                                  -- High if decimal point should be displayed on selected display
 end Mux;
 
 architecture Behavioral of Mux is
-    signal nibble: std_logic_vector (3 downto 0) := "1010";
+    signal nibble: std_logic_vector (3 downto 0) := (others => '0');
     signal dp_enable: std_logic := '0';
 begin
     BCD <= nibble;
     DP <= dp_enable;
-    process (DISPLAY_SEL, MESSAGE, nibble) is
+    multiplex: process (DISPLAY_SEL, MESSAGE) is
     begin
         dp_enable <= '0';
-        if DISPLAY_SEL = "000" then
+        if DISPLAY_SEL = "000" then              -- Checks for decimal point code from the first 3 displays where dots are displayed
             if MESSAGE(3 downto 0) = x"F" then
                 dp_enable <= '1';
             else
@@ -47,5 +54,5 @@ begin
         elsif DISPLAY_SEL = "111" then
             nibble <= MESSAGE(31 downto 28);
         end if;
-    end process;
+    end process multiplex;
 end Behavioral;

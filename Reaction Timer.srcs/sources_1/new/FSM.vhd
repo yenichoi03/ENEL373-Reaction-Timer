@@ -1,22 +1,8 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 13.03.2024 10:20:50
--- Design Name: 
--- Module Name: FSM - Behavioral
--- Project Name: 
--- Target Devices: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
+-- Title: Reaction Timer Finite State Machine
+-- Author: EWB, YYC, & MWD
+-- Date: 2024
+-- Description: This component controls the current state and outputs of the reaction timer
 ----------------------------------------------------------------------------------
 
 library IEEE;
@@ -24,16 +10,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity FSM is
-    Port ( CLK, RST: in STD_LOGIC;
-           BTNC, BTNU, BTND, BTNL, BTNR  : in STD_LOGIC := '0';
-           op : out STD_LOGIC_VECTOR(2 downto 0) := "000";
-           CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-           RESULT : in STD_LOGIC_VECTOR(15 downto 0);                               
-           COUNT_1,COUNT_2,COUNT_3,COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- uses one segment of the 7 segment display 
-           counter_en, counter_rst, alu_en, shift_en, shift_rst : out STD_LOGIC := '0'; 
-           prng_rst : out std_logic := '1';
-           message : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" ;       -- each nibble of message represent one character or digit on a 7 segment display.
-           random : in INTEGER range 0 to 5000);
+    Port ( CLK, RST: in STD_LOGIC;                                              -- Clock in and global reset  
+           BTNC, BTNU, BTND, BTNL, BTNR  : in STD_LOGIC := '0';                 -- External button inputs
+           OP : out STD_LOGIC_VECTOR(2 downto 0) := "000";                      -- ALU op code
+           CURRENT_TIME : out STD_LOGIC_VECTOR(15 downto 0) := (others => '0'); -- Most recent reaction time
+           RESULT : in STD_LOGIC_VECTOR(15 downto 0);                           -- ALU output    
+           COUNT_1, COUNT_2, COUNT_3, COUNT_4 : in STD_LOGIC_VECTOR (3 downto 0);  -- Each digit of the measured time
+           COUNTER_EN, COUNTER_RST : out STD_LOGIC := '0';                      -- Enable and reset the counters for timing
+           ALU_EN : out STD_LOGIC := '0';                                       -- Enable the ALU
+           SHIFT_EN, SHIFT_RST : out STD_LOGIC := '0';                          -- Enable and reset for the shift register of reaction times
+           MESSAGE : out STD_LOGIC_VECTOR (31 downto 0) := x"aaaaaaaa" ;        -- each nibble of message represent one character or digit on a 7 segment display.
+           RANDOM : in INTEGER range 0 to 5000);                                -- An always changing pseudorandom number
 end FSM;
 
 architecture Behavioral of FSM is
@@ -43,12 +30,8 @@ architecture Behavioral of FSM is
     signal current_state, next_state : state := idle;
     constant T1: natural := 5001;
     signal t: natural range 0 to T1 -1;
-    
-    signal best_time : STD_LOGIC_VECTOR(15 downto 0) := x"0000";
-    signal worst_time : STD_LOGIC_VECTOR(15 downto 0) := x"FFFF";
-    signal clear_time : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal sum : STD_LOGIC_VECTOR(47 downto 0) := x"000000000000";
-    signal r_time1 : INTEGER range 0 to 5000 := 900; -- insert the random number that is generated here
+  
+    signal r_time1 : INTEGER range 0 to 5000 := 900; -- initial values for time between dots, replaced by random values
     signal r_time2 : INTEGER range 0 to 5000 := 1200;
     signal r_time3 : INTEGER range 0 to 5000 := 1000;
     
@@ -191,12 +174,11 @@ begin
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             r_time3 <= random;
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
-            message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
+            message <= X"aaaaaFFF"; -- displays 3 dots 
         when dot_3 =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
@@ -206,7 +188,7 @@ begin
             op <= "000";
             counter_en <= '0';
             counter_rst <= '1';
-            message <= X"aaaaaFFF"; -- to modify to show three dots. Hex representation 
+            message <= X"aaaaaFFF"; -- displays 3 dots
             
         when dot_2 =>
             CURRENT_TIME <= x"0000";
@@ -217,7 +199,7 @@ begin
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
-            message <= X"aaaaaaFF"; -- to modify to show two dots
+            message <= X"aaaaaaFF"; -- displays 2 dots
 
         when dot_1 =>
             CURRENT_TIME <= x"0000";
@@ -228,101 +210,92 @@ begin
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
-            message <= X"aaaaaaaF"; -- to modify to show one dots
+            message <= X"aaaaaaaF"; -- displays 1 dot
 
         when counting =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '1';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Decade counter counts           
+            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays live time           
         when buffering =>
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- DISPLAY MOST RECENT TIME
+            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays final time
         when print_current_time =>
             shift_en <= '1';
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- DISPLAY MOST RECENT TIME
+            message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays most recent final time
         when print_best_time =>
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "100";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1101" & "1010" ;
-            message(15 downto 0) <= result; --DISPLAY SHORTEST TIME
+            message(15 downto 0) <= result;                                --Displays shortest time
         when print_worst_time =>
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "001";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "0101" & "1010" ;
-            message(15 downto 0) <= result; --DISPLAY LONGEST TIME
+            message(15 downto 0) <= result;                                 --Displays longest time
         when print_average_time =>
             CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
             alu_en <= '1';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "010";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1100" & "1010" ;
-            message(15 downto 0) <= result; -- DISPLAY AVG TIME
+            message(15 downto 0) <= result;                                 -- Displays average time
         when clear_time_data =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '1';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
             message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-            message(15 downto 0) <= x"aBBB";            
+            message(15 downto 0) <= x"aBBB";                               -- Displays reset code            
         when error =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
-            message <= x"aaaaa333"; -- display error
+            message <= x"aaaaa333";                                        -- Displays error code
         when others =>
             CURRENT_TIME <= x"0000";
             alu_en <= '0';
             shift_en <= '0';
             shift_rst <= '0';
-            prng_rst <= '0';
             op <= "000";
             counter_en <= '0';
             counter_rst <= '0';
@@ -331,9 +304,7 @@ begin
     
 end process;
 
-
-
-TIMER: process (CLK)
+TIMER: process (CLK) --This timer is used for button debouncing
 begin
     if(rising_edge(CLK)) then
         if current_state /= next_state then
@@ -343,7 +314,6 @@ begin
         end if;
     end if;
 end process;
-
 
 end Behavioral;
 
