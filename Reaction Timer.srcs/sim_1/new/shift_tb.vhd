@@ -1,35 +1,15 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 02.05.2024 14:54:10
--- Design Name: 
--- Module Name: shift_tb - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
+-- Title: Shift Register Testbench
+-- Authors: EWB, YYC, & MWD
+-- Date: 2024
+-- Description: This testbench simulates a series of changing inputs to the shift register
 ----------------------------------------------------------------------------------
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity shift_tb is
---  Port ( );
 end shift_tb;
 
 architecture Behavioral of shift_tb is

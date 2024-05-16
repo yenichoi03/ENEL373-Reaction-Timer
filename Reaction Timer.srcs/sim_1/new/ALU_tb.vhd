@@ -1,55 +1,48 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 04.04.2024 22:23:11
--- Design Name: 
--- Module Name: ALU_tb - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
+-- Title: Shift Register Testbench
+-- Authors: EWB, YYC, & MWD
+-- Date: 2024
+-- Description: This testbench simulates the behaviour of the ALU for various opperations
 ----------------------------------------------------------------------------------
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
 
 entity ALU_tb is
 end ALU_tb;
 
 architecture Behavioral of ALU_tb is
 
+component ALU is
+     Port (OP : in STD_LOGIC_VECTOR(2 downto 0);                  -- Code selects whether the ALU will output: best time, worst time, or average time
+          ALU_EN : in STD_LOGIC;                                  -- ALU performs arithmetic when this input is high
+          clk : in STD_LOGIC;                                     -- Clock in 
+          A: in integer range 0 to 9999;                          -- Newest reaction time
+          B: in integer range 0 to 9999;                          -- Middle reaction time
+          C: in integer range 0 to 9999;                          -- Oldest reaction time
+          R: out integer range 0 to 9999 := 1111);                -- Result from arithmetic operation
+end component;
+
 signal op : std_logic_vector (2 downto 0) := "101"; -- 001 for add, 010 for divide, 100 for compare
-signal ALU_en : std_logic := '1';
-signal A, B : integer := 1;
-signal C : integer := 4;
-signal R : integer := 0;
+signal alu_en : std_logic := '1';
+signal a, b : integer := 1;
+signal c : integer := 4;
+signal r : integer := 0;
+signal clk : std_logic := '0';
 
 begin
---ALU_en <= not ALU_en after 15ns; 
 
 process
 begin 
-
+    clk <= not clk after 1ns;
     op <= "010";
     wait for 5ns; 
     op <= "100";
     wait for 5ns;
     op <= "001";
     wait for 5ns;
-
 end process;
 
-inst_ALU : entity work.ALU(Behavioral)
-port map (op => op, A=>A, B=>B, C=>C, R=>R, ALU_en => ALU_en);
+ALU_tb : ALU port map (CLK => clk, OP => op, A=>a, B=>b, C=>c, R=>r, ALU_EN => alu_en);
 
 end Behavioral;
