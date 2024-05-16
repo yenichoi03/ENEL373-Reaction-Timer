@@ -20,56 +20,54 @@ entity ALU is
 end ALU;
 
 architecture Behavioral of ALU is
+
 begin
     
-    arithmetic: process(CLK, ALU_EN)
+    arithmetic: process(CLK)
     variable result : integer range 0 to 9999; 
-    
     begin
-
-    if(ALU_en = '1' and rising_edge(CLK)) then
-        if(op = "001") then --worst time, BTNU
-            result := 0;
-            if(a > result) then 
-                result := a;
-            end if;
-            if(b > result) then 
-                result := b;
-            end if;
-            if (c > result) then
-                result := c;
-            end if;
-        elsif(op = "100") then --best time, BTND
-            result := 9999;
-             if(a < result) then
-                if(not(a=0)) then 
+        if(ALU_en = '1' and rising_edge(CLK)) then
+            if(op = "001") then --worst time, BTNU
+                result := 0;
+                if(a > result) then 
                     result := a;
                 end if;
-            end if;
-            if (b < result) then
-                if(not(b=0)) then  
+                if(b > result) then 
                     result := b;
                 end if;
-            end if;
-            if (c < result) then
-                if(not(c=0)) then 
-                result := c;
+                if (c > result) then
+                    result := c;
+                end if;
+            elsif(op = "100") then --best time, BTND
+                result := 9999;
+                 if(a < result) then
+                    if(not(a=0)) then 
+                        result := a;
+                    end if;
+                end if;
+                if (b < result) then
+                    if(not(b=0)) then  
+                        result := b;
+                    end if;
+                end if;
+                if (c < result) then
+                    if(not(c=0)) then 
+                    result := c;
+                    end if;
+                end if;
+            elsif(op = "010") then -- average time, BTNL
+                if(a = 0 and B = 0 and c = 0) then 
+                   result := 0;
+                elsif(A=0 xor  b= 0 xor c =0) then  -- empty values should not be included in the average
+                result := (a+b+c)/2;
+                elsif(((a =0) and (b= 0))or ((a=0) and (c = 0)) or ((b=0) and (c=0))) then
+                result := (a+b+c);
+                else
+                result := (a+b+c)/3;
                 end if;
             end if;
-        elsif(op = "010") then -- average time, BTNL
-            if(a = 0 and B = 0 and c = 0) then 
-               result := 0;
-            elsif(A=0 xor  b= 0 xor c =0) then  -- empty values should not be included in the average
-            result := (a+b+c)/2;
-            elsif(((a =0) and (b= 0))or ((a=0) and (c = 0)) or ((b=0) and (c=0))) then
-            result := (a+b+c);
-            else
-            result := (a+b+c)/3;
-            end if;
         end if;
-       
-    end if;
         R <= result;
-end process arithmetic;
+    end process arithmetic;
 
 end Behavioral;

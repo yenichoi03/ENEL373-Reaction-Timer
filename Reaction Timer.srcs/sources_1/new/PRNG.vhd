@@ -17,17 +17,17 @@ entity PRNG is
 end PRNG;
 
 architecture Behavioral of PRNG is
+
     signal trigger : std_logic_vector(3 downto 0) := "0001";  -- Aribtrary starting seed
     
 begin
 
-    process (clk)
-    begin 
-            
-    if rising_edge(clk) then 
-        trigger <= trigger(2 downto 0) & (trigger(3) xor trigger(1)); 
+    randomise: process (clk)
+    begin        
+        if rising_edge(clk) then 
+            trigger <= trigger(2 downto 0) & (trigger(3) xor trigger(1)); 
         end if;
-    end process;
+    end process randomise;
     
     random <= 500 * TO_INTEGER(UNSIGNED(trigger(3 downto 0))); -- Scaled to a reasonable delay time
     

@@ -17,11 +17,15 @@ entity Mux is
 end Mux;
 
 architecture Behavioral of Mux is
+
     signal nibble: std_logic_vector (3 downto 0) := (others => '0');
     signal dp_enable: std_logic := '0';
+    
 begin
+
     BCD <= nibble;
     DP <= dp_enable;
+    
     multiplex: process (DISPLAY_SEL, MESSAGE) is
     begin
         dp_enable <= '0';
@@ -53,6 +57,9 @@ begin
             nibble <= MESSAGE(27 downto 24);
         elsif DISPLAY_SEL = "111" then
             nibble <= MESSAGE(31 downto 28);
+        else
+            nibble <= (others => '0');
         end if;
     end process multiplex;
+    
 end Behavioral;

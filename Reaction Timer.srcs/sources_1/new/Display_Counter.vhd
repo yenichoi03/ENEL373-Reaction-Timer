@@ -15,18 +15,19 @@ entity Display_Counter is
 end Display_Counter;
 
 architecture Behavioral of Display_Counter is
+
     signal count_tmp: std_logic_vector (2 downto 0) := (others => '0');
+    
 begin
 
     COUNT <= count_tmp;
+    
     process (CLK)
     begin
-
         if count_tmp = "111" then --8th display
             count_tmp <= "000";   --1st display
-        
         elsif rising_edge(CLK) then
-                count_tmp <= std_logic_vector(unsigned(count_tmp) + 1);
+            count_tmp <= std_logic_vector(unsigned(count_tmp) + 1);
         end if;
     end process;
     

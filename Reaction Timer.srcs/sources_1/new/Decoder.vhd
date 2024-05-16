@@ -15,7 +15,9 @@ entity decoder is
 end decoder;
 
 architecture Behavioral of decoder is
+
 begin
+
     decode: process (DISPLAY_SEL) is
     begin
         ANODE <= "11111111";
@@ -39,5 +41,6 @@ begin
             ANODE <= "11111111";
         end if;
     end process decode;
+    
 end Behavioral;
 

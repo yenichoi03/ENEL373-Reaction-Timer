@@ -15,7 +15,9 @@ entity bcd_to_7seg is
 end bcd_to_7seg;
 
 architecture Behavioural of bcd_to_7seg is
+
     begin
+    
         process (bcd) is
         begin
              case (bcd) is
@@ -39,7 +41,9 @@ architecture Behavioural of bcd_to_7seg is
 
             end case;
         end process; 
+        
     seg(7) <= dp;
+    
 end Behavioural;
 
 

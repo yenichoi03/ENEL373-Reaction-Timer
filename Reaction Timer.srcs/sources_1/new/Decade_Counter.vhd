@@ -19,9 +19,12 @@ entity decade_counter is
 end decade_counter;
 
 architecture Behavioral of decade_counter is
+
     signal count_tmp: std_logic_vector (3 downto 0) := (others => '0');   
     signal tick_toggle : std_logic := '0';
+    
 begin
+
     COUNT <= count_tmp;
     TICK <= tick_toggle;
     

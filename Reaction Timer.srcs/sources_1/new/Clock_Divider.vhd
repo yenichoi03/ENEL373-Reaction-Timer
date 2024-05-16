@@ -16,8 +16,10 @@ entity clock_divider is
 end clock_divider;
 
 architecture Behavioral of clock_divider is
+
     signal count: std_logic_vector (27 downto 0) := (others => '0');
     signal slow: std_logic := '1';
+    
 begin
 
     SLOWCLK <= slow;
