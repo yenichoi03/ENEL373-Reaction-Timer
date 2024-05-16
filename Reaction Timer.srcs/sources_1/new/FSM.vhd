@@ -37,7 +37,7 @@ architecture Behavioral of FSM is
            
 begin
 
-    STATE_REGISTER: process(CLK, RST)
+    state_register: process(CLK, RST)
     begin
         if (rising_edge(CLK)) then
             if (RST = '1') then
@@ -46,9 +46,9 @@ begin
                 current_state <= next_state;
             end if;
         end if;
-    end process;
+    end process state_register;
 
-    NEXT_STATE_DECODE: process (current_state, t, BTNC, BTNU, BTND, BTNL, BTNR)
+    state_decode: process (current_state, t, BTNC, BTNU, BTND, BTNL, BTNR)
 
     begin 
         case (current_state) is
@@ -58,6 +58,7 @@ begin
                 else
                     next_state <= idle;
                 end if;
+
             when dot_3 =>
                 if t = r_time3 then
                     next_state <= dot_2;
@@ -75,6 +76,7 @@ begin
                 else
                     next_state <= dot_2;
                 end if;
+
             when dot_1 =>
                 if t = r_time1 then
                     next_state <= counting;
@@ -83,6 +85,7 @@ begin
                 else
                     next_state <= dot_1;
                 end if;
+
             when counting => 
                 if BTNC = '1' then
                     next_state <= buffering;
@@ -123,6 +126,7 @@ begin
                 else
                     next_state <= print_worst_time;
                 end if;
+
             when print_best_time =>
                 if BTNC = '1' and t > 999 then
                     next_state <= dot_3;
@@ -135,6 +139,7 @@ begin
                 else
                     next_state <= print_best_time;
                 end if;
+
             when print_average_time =>
                 if BTNC = '1' and t > 999 then
                     next_state <= dot_3;
@@ -147,162 +152,173 @@ begin
                 else
                     next_state <= print_average_time;
                 end if;
+
             when clear_time_data =>
                 if BTNC = '1' and t > 999 then
                     next_state <= dot_3;
                 else
                     next_state <= clear_time_data;
                 end if;
+
             when error =>
                 if BTNC = '1' and t > 666 then
                     next_state <= dot_3;
                 else
                     next_state <= error;
                 end if;
+
             when others => 
                 next_state <= current_state;
         end case;
-    end process;
+    end process state_decode;
 
-    OUTPUT_DECODE: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4, random)
+    output_decode: process(current_state, COUNT_1,COUNT_2,COUNT_3,COUNT_4, random)
     begin
         case (current_state) is
             when idle =>
                 CURRENT_TIME <= x"0000";
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '0';
-                r_time3 <= random;
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message <= X"aaaaaFFF"; -- displays 3 dots 
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE <= X"AAAAAFFF"; -- displays 3 dots 
+
             when dot_3 =>
                 CURRENT_TIME <= x"0000";
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '0';
-                r_time1 <= random;
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '1';
-                message <= X"aaaaaFFF"; -- displays 3 dots
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                r_time1 <= RANDOM;
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '1';
+                MESSAGE <= X"AAAAAFFF"; -- displays 3 dots
                 
             when dot_2 =>
                 CURRENT_TIME <= x"0000";
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '0';
-                r_time3 <= random;
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message <= X"aaaaaaFF"; -- displays 2 dots
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                r_time3 <= RANDOM;
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE <= X"AAAAAAFF"; -- displays 2 dots
     
             when dot_1 =>
                 CURRENT_TIME <= x"0000";
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '0';
-                r_time2 <= random;
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message <= X"aaaaaaaF"; -- displays 1 dot
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                r_time2 <= RANDOM;
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE <= X"AAAAAAAF"; -- displays 1 dot
     
             when counting =>
                 CURRENT_TIME <= x"0000";
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '0';
-                op <= "000";
-                counter_en <= '1';
-                counter_rst <= '0';
-                message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-                message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays live time           
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "000";
+                COUNTER_EN <= '1';
+                COUNTER_RST <= '0';
+                MESSAGE(31 downto 16) <= x"AAAA" ;
+                MESSAGE(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays live time   
+
             when buffering =>
                 CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '0';
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-                message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays final time
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE(31 downto 16) <= x"AAAA" ;
+                MESSAGE(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays final time
+
             when print_current_time =>
-                shift_en <= '1';
+                SHIFT_EN <= '1';
                 CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
-                alu_en <= '0';
-                shift_rst <= '0';
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-                message(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays most recent final time
+                ALU_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE(31 downto 16) <= x"AAAA" ;
+                MESSAGE(15 downto 0) <=  COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1; -- Displays most recent final time
+
             when print_best_time =>
                 CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
-                alu_en <= '1';
-                shift_en <= '0';
-                shift_rst <= '0';
-                op <= "100";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message(31 downto 16) <= "1010" & "1010" & "1101" & "1010" ;
-                message(15 downto 0) <= result;                                --Displays shortest time
+                ALU_EN <= '1';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "100";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE(31 downto 16) <= x"AAAA" ;
+                MESSAGE(15 downto 0) <= RESULT;                                --Displays shortest time
+
             when print_worst_time =>
                 CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
-                alu_en <= '1';
-                shift_en <= '0';
-                shift_rst <= '0';
-                op <= "001";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message(31 downto 16) <= "1010" & "1010" & "0101" & "1010" ;
-                message(15 downto 0) <= result;                                 --Displays longest time
+                ALU_EN <= '1';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "001";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE(31 downto 16) <= x"AAAA" ;
+                MESSAGE(15 downto 0) <= RESULT;                                 --Displays longest time
+
             when print_average_time =>
                 CURRENT_TIME <= COUNT_4 & COUNT_3 & COUNT_2 & COUNT_1;
-                alu_en <= '1';
-                shift_en <= '0';
-                shift_rst <= '0';
-                op <= "010";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message(31 downto 16) <= "1010" & "1010" & "1100" & "1010" ;
-                message(15 downto 0) <= result;                                 -- Displays average time
+                ALU_EN <= '1';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "010";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE(31 downto 16) <= x"AAAA" ;
+                MESSAGE(15 downto 0) <= RESULT;                                 -- Displays average time
+
             when clear_time_data =>
                 CURRENT_TIME <= x"0000";
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '1';
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message(31 downto 16) <= "1010" & "1010" & "1010" & "1010" ;
-                message(15 downto 0) <= x"aBBB";                               -- Displays reset code            
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '1';
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE(31 downto 16) <= x"AAAA" ;
+                MESSAGE(15 downto 0) <= x"ABBB";                               -- Displays reset code     
+
             when error =>
                 CURRENT_TIME <= x"0000";
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '0';
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message <= x"aaaaa333";                                        -- Displays error code
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE <= x"AAAAA333";                                        -- Displays error code
+
             when others =>
                 CURRENT_TIME <= x"0000";
-                alu_en <= '0';
-                shift_en <= '0';
-                shift_rst <= '0';
-                op <= "000";
-                counter_en <= '0';
-                counter_rst <= '0';
-                message <= X"aaaaaaaa";
+                ALU_EN <= '0';
+                SHIFT_EN <= '0';
+                SHIFT_RST <= '0';
+                OP <= "000";
+                COUNTER_EN <= '0';
+                COUNTER_RST <= '0';
+                MESSAGE <= X"AAAAAAAA";
         end case;
         
-    end process;
+    end process output_decode;
 
-    TIMER: process (CLK) --This timer is used for button debouncing
+    time: process (CLK) --This timer is used for button debouncing
     begin
         if(rising_edge(CLK)) then
             if current_state /= next_state then
@@ -311,7 +327,7 @@ begin
                 t <= t + 1;
             end if;
         end if;
-    end process;
+    end process time;
 
 end Behavioral;
 
